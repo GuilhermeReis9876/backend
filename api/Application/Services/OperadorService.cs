@@ -3,6 +3,7 @@ using api.Models.Entities;
 using Application.Interfaces;
 using Domain.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,6 +17,35 @@ namespace api.Application.Services
         public OperadorService(IOperadorRepository operadorRepository)
         {
             _operadorRepository = operadorRepository;
+        }
+
+        public async Task Delete(Operador operador)
+        {
+            try
+            {
+                await _operadorRepository.Delete(operador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + $"{operador.GetType().Name}");
+            }
+        }
+
+        public async Task<Operador> GetById(int id)
+        {
+            try
+            {
+                return await _operadorRepository.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<IEnumerable<Operador>> GetOperadores()
+        {
+            return await _operadorRepository.GetAll();
         }
 
         public async Task Save(UsuarioViewModel operadorVM)
@@ -34,6 +64,18 @@ namespace api.Application.Services
             try
             {
                 await _operadorRepository.Save(operador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + $"{operador.GetType().Name}");
+            }
+        }
+
+        public async Task Update(Operador operador)
+        {
+            try
+            {
+                await _operadorRepository.Update(operador);
             }
             catch (Exception ex)
             {

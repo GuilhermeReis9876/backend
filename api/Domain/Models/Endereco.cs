@@ -5,7 +5,6 @@ namespace api.Models.Entities
     [Table("Enderecos")]
     public class Endereco : BaseModel
     {
-
         public string Cep { get; set; }
 
         public string Logradouro { get; set; }

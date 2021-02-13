@@ -1,5 +1,4 @@
-using api.Controllers;
-using api.Domain.ViewModels;
+﻿using api.Domain.ViewModels;
 using api.Models.Entities;
 using Application.Interfaces;
 using AutoMapper;
@@ -9,18 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Controllers
+namespace api.Controllers
 {
-
-    public class ClienteController : BaseApiController
+    public class OperadorController : BaseApiController
     {
-        private IClienteService _clienteService;
+
+        private IOperadorService _operadorService;
         private ILoginService _loginService;
         private IMapper _mapper;
 
-        public ClienteController(
-            ILogger<ClienteController> logger,
-            IClienteService service,
+        public OperadorController(
+            ILogger<OperadorController> logger,
+            IOperadorService service,
             ILoginService loginService,
             IMapper mapper
 
@@ -28,15 +27,14 @@ namespace Controllers
             base(logger, mapper)
         {
             _mapper = mapper;
-            _clienteService = service;
+            _operadorService = service;
             _loginService = loginService;
         }
-
         [Route("List")]
         [HttpGet]
         public async Task<IEnumerable<UsuarioResponseViewModel>> GetAll()
         {
-            var clientes = await _clienteService.GetClientes();
+            var clientes = await _operadorService.GetOperadores();
             var clientesVM = new List<UsuarioResponseViewModel>();
 
             foreach (var cliente in clientes)
@@ -53,7 +51,7 @@ namespace Controllers
         {
             try
             {
-                return _mapper.Map<UsuarioResponseViewModel>(await _clienteService.GetById(id));
+                return _mapper.Map<UsuarioResponseViewModel>(await _operadorService.GetById(id));
             }
             catch (Exception ex)
             {
@@ -63,14 +61,14 @@ namespace Controllers
 
         [Route("Update/{id}")]
         [HttpPut]
-        public async Task<IActionResult> Update(int id, [FromBody] UsuarioUpdateViewModel clienteVM)
+        public async Task<IActionResult> Update(int id, [FromBody] UsuarioUpdateViewModel operadorVM)
         {
             try
             {
-                var cliente = _mapper.Map<Cliente>(clienteVM);
+                var operador = _mapper.Map<Operador>(operadorVM);
 
-                cliente.Id = id;
-                await _clienteService.Update(cliente);
+                operador.Id = id;
+                await _operadorService.Update(operador);
 
                 return StatusCode(200, "atualizado com sucesso!");
             }
@@ -91,7 +89,7 @@ namespace Controllers
         {
             try
             {
-                await _clienteService.Delete(await _clienteService.GetById(id));
+                await _operadorService.Delete(await _operadorService.GetById(id));
 
                 return StatusCode(200, "Deletado com sucesso!");
             }
@@ -104,6 +102,5 @@ namespace Controllers
                 return StatusCode(400, ex.Message);
             }
         }
-
     }
 }
