@@ -38,15 +38,22 @@ namespace api
             });
 
             RegisterServices(services);
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => 
+            
+            services.AddAuthentication(x =>
                 {
-                    options.TokenValidationParameters = new TokenValidationParameters
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"])),
                         ValidateIssuer = false,
-                        ValidateAudience = false,
+                        ValidateAudience = false
                     };
                 });
 

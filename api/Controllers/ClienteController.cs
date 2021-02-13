@@ -32,7 +32,6 @@ namespace Controllers
 
         [Route("List")]
         [HttpGet]
-        [Authorize]
         public async Task<IEnumerable<UsuarioViewModel>> GetAll()
         {
             var clientes = await _service.GetClientes();
