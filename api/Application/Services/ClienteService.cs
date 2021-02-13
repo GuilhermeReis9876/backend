@@ -13,7 +13,7 @@ namespace Application.Services
 {
     public class ClienteService : IClienteService
     {
-        public IClienteRepository _clienteRepository;
+        private readonly IClienteRepository _clienteRepository;
 
         public ClienteService(IClienteRepository clienteRepository)
         {

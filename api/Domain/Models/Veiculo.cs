@@ -24,6 +24,6 @@ namespace api.Models.Entities
 
         public int Kilometragem { get; set; }
 
-        public bool EstaLocado {get; set;}
+        public bool EstaLocado { get; set; }
     }
 }

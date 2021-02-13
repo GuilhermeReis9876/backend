@@ -2,6 +2,7 @@ using api.Models.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -14,6 +15,11 @@ namespace Infrastructure.Repositories
         {
             _context = context;
             _operadores = context.Set<Operador>();
+        }
+
+        public async Task<Operador> UserExists(string register)
+        {
+            return await _operadores.SingleOrDefaultAsync(x => x.Matricula == register);
         }
 
     }

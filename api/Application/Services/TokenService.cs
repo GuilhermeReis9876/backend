@@ -1,4 +1,3 @@
-using api.Models.Entities;
 using Application.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -20,11 +19,14 @@ namespace Application.Services
                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
 
-        public string CreateToken(Cliente user)
+        public string CreateToken(object usuario)
         {
+            var propertyNome = usuario.GetType().GetProperty("Nome");
+            var Nome = (string)propertyNome.GetValue(usuario);
+
             var claims =
                 new List<Claim> {
-                    new Claim(JwtRegisteredClaimNames.NameId, user.Nome)
+                    new Claim(JwtRegisteredClaimNames.NameId, Nome)
                 };
 
             // Creating Credentials

@@ -3,8 +3,10 @@ using api.Domain.ViewModels;
 using api.Models.Entities;
 using Application.Interfaces;
 using AutoMapper;
+using CpfLibrary;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace Controllers
@@ -14,10 +16,12 @@ namespace Controllers
         private IClienteService _clienteService;
         private IMapper _mapper;
         private ILoginService _loginService;
+        public IOperadorService _operadorService;
 
         public AccountController(
             ILogger<AccountController> logger,
             IClienteService clienteService,
+            IOperadorService operadorService,
             IMapper mapper,
             ILoginService loginService
 
@@ -27,6 +31,7 @@ namespace Controllers
             _mapper = mapper;
             _clienteService = clienteService;
             _loginService = loginService;
+            _operadorService = operadorService;
         }
 
         [HttpPost("login")]
@@ -38,21 +43,49 @@ namespace Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create(UsuarioViewModel usuarioVM)
         {
+            if (string.IsNullOrEmpty(usuarioVM.Nome))
+                return BadRequest("Nome é requerido para cadastro!");
+
             if (usuarioVM.TipoUsuario == EnumTipoDeUsuario.CLIENTE)
             {
-                if (await _loginService.UserExists(usuarioVM.Cpf))
-                    return BadRequest("Usuario ja cadastrado!");
-
-                await _clienteService.Save(usuarioVM);
-                return StatusCode(200, $"Usuario {usuarioVM.Nome} criado com sucesso!");
+                if (Cpf.Check(usuarioVM.Cpf))
+                {
+                    if (await _loginService.UserExists(usuarioVM.Cpf))
+                        return BadRequest($"{usuarioVM.Nome} ja cadastrado!");
+                    try
+                    {
+                        await _clienteService.Save(usuarioVM);
+                        return StatusCode(200, $"Cliente {usuarioVM.Nome} criado com sucesso!");
+                    }
+                    catch (Exception ex)
+                    {
+                        return BadRequest(ex.Message);
+                    }
+                }
+                else
+                {
+                    return BadRequest("CPF inserido não é um CPF válido!");
+                }
             }
-
-            if (usuarioVM.TipoUsuario == EnumTipoDeUsuario.OPERADOR)
+            else if (usuarioVM.TipoUsuario == EnumTipoDeUsuario.OPERADOR)
             {
-                return BadRequest();
+                if (await _loginService.UserExists(usuarioVM.Matricula))
+                    return BadRequest($"Operador {usuarioVM.Nome} ja cadastrado!");
+
+                try
+                {
+                    await _operadorService.Save(usuarioVM);
+                    return StatusCode(200, $"Operador {usuarioVM.Nome} criado com sucesso!");
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
 
-            return BadRequest();
+            return BadRequest("Não foi possível efetuar o cadastrar");
         }
+
     }
+
 }
