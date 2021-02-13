@@ -23,5 +23,10 @@ namespace Infrastructure.Repositories
             return await _clientes.Include(x => x.Endereco).ToListAsync();
         }
 
+        public async Task<Cliente> UserExists(string register)
+        {
+            return await _clientes.SingleOrDefaultAsync(x => x.Cpf == register);
+        }
+
     }
 }

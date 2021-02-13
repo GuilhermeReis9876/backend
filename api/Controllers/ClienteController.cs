@@ -3,6 +3,7 @@ using api.Domain.ViewModels;
 using api.Models.Entities;
 using Application.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -31,6 +32,7 @@ namespace Controllers
 
         [Route("List")]
         [HttpGet]
+        [Authorize]
         public async Task<IEnumerable<UsuarioViewModel>> GetAll()
         {
             var clientes = await _service.GetClientes();

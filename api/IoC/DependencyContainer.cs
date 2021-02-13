@@ -13,6 +13,8 @@ namespace api.IoC
         {
             // Application Layer
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ILoginService, LoginService>();
             //Infrastructure Layer
 
             services.AddScoped<IClienteRepository, ClienteRepository>();

@@ -39,7 +39,6 @@ namespace Infrastructure.Data
                 Nome = "Primeiro Usuario",
                 Cpf = "111.111.111-11",
                 DiaDeNascimento = DateTime.Now,
-                Senha = "senhateste@",
                 TipoDeUsuario = EnumTipoDeUsuario.CLIENTE,
                 EnderecoId = -1
             });
