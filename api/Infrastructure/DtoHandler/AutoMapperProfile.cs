@@ -16,6 +16,10 @@ namespace api.Infrastructure.DtoHandler
                .ForMember(dest => dest.DiaDeNascimento, opt => opt.MapFrom(src => DateTime.ParseExact(src.DiaDeNascimento, "dd/MM/yyyy", CultureInfo.InvariantCulture)))
                .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome));
 
+           
+
+
+
         }
     }
 }
