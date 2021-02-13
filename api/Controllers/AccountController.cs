@@ -38,16 +38,16 @@ namespace Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create(UsuarioViewModel usuarioVM)
         {
-            if (usuarioVM.TipoUsuário == EnumTipoDeUsuario.CLIENTE)
+            if (usuarioVM.TipoUsuario == EnumTipoDeUsuario.CLIENTE)
             {
                 if (await _loginService.UserExists(usuarioVM.Cpf))
-                    return BadRequest("Usuário já cadastrado!");
+                    return BadRequest("Usuario ja cadastrado!");
 
                 await _clienteService.Save(usuarioVM);
-                return StatusCode(200, $"Usuário {usuarioVM.Nome} criado com sucesso!");
+                return StatusCode(200, $"Usuario {usuarioVM.Nome} criado com sucesso!");
             }
 
-            if (usuarioVM.TipoUsuário == EnumTipoDeUsuario.OPERADOR)
+            if (usuarioVM.TipoUsuario == EnumTipoDeUsuario.OPERADOR)
             {
                 return BadRequest();
             }

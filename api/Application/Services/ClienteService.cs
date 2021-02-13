@@ -45,7 +45,7 @@ namespace Application.Services
                 Nome = clienteVM.Nome,
                 DiaDeNascimento = DateTime.ParseExact(clienteVM.DiaDeNascimento, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 Cpf = clienteVM.Cpf,
-                PassworkHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(clienteVM.Senha)),
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(clienteVM.Senha)),
                 PasswordSalt = hmac.Key,
 
             };

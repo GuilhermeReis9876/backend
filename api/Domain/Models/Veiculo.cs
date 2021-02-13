@@ -23,5 +23,7 @@ namespace api.Models.Entities
         public Modelo Modelo { get; set; }
 
         public int Kilometragem { get; set; }
+
+        public bool EstaLocado {get; set;}
     }
 }

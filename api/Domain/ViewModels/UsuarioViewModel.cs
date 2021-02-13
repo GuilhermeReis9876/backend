@@ -14,7 +14,7 @@ namespace api.Domain.ViewModels
 
         public string DiaDeNascimento { get; set; }
 
-        public EnumTipoDeUsuario TipoUsuário { get; set; }
+        public EnumTipoDeUsuario TipoUsuario { get; set; }
 
         public string Error { get; set; }
 

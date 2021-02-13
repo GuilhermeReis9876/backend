@@ -12,5 +12,15 @@ namespace api.Models.Entities
         public bool EstaSemAmassados { get; set; }
 
         public bool EstaSemArranhoes { get; set; }
+
+        [ForeignKey("LocacaoVeiculo")]
+        public int LocacaoVeiculoId { get; set; }
+
+        public LocacaoVeiculo LocacaoVeiculo { get; set; }
+
+        [ForeignKey("Operador")]
+        public int OperadorId { get; set; }
+
+        public Operador Operador { get; set; }
     }
 }

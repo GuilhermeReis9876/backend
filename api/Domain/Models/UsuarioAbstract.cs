@@ -14,7 +14,7 @@ namespace api.Models.Entities
         public Endereco Endereco { get; set; }
 
         public byte[] PasswordSalt { get; set; }
-        public byte[] PassworkHash { get; set; }
+        public byte[] PasswordHash { get; set; }
 
 
     }

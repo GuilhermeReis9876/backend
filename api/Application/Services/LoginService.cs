@@ -1,7 +1,9 @@
+using System.Text;
 using api.Domain.ViewModels;
 using Application.Interfaces;
 using Domain.Interfaces;
 using System;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Application.Services
@@ -23,6 +25,14 @@ namespace Application.Services
 
             if (user == null) throw new NotImplementedException();
 
+            var hmac = new HMACSHA512(user.PasswordSalt);
+
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(senha));
+
+            for (int i = 0; i< computedHash.Length ; i++)
+            {
+                if(computedHash[i] != user.PasswordHash[i]) throw new NotImplementedException();
+            }
 
             return new LoginViewModel
             {

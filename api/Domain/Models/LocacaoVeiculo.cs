@@ -20,11 +20,5 @@ namespace api.Models.Entities
         public DateTime DataLocacao { get; set; }
 
         public DateTime DataDevolucao { get; set; }
-
-        public bool EstaLocado { get; set; }
-
-        [ForeignKey("Checklist")]
-        public int CheckelistId { get; set; }
-        public CheckList CheckList { get; set; }
     }
 }

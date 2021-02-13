@@ -3,6 +3,7 @@ using api.Domain.ViewModels;
 using api.Models.Entities;
 using Application.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -49,6 +50,7 @@ namespace Controllers
 
         [Route("GetById/{id}")]
         [HttpGet]
+        [Authorize]
         public async Task<UsuarioViewModel> GetById(int id)
         {
             try
@@ -69,7 +71,7 @@ namespace Controllers
         //    {
 
         //        if (await _loginService.UserExists(clienteVM.Cpf))
-        //            return BadRequest("Usuário já cadastrado!");
+        //            return BadRequest("Usuï¿½rio jï¿½ cadastrado!");
 
         //        await _clienteService.Save(clienteVM);
         //        return StatusCode(200, $"{clienteVM.Nome} adicionado com sucesso!");
