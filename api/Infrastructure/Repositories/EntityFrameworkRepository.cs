@@ -27,13 +27,28 @@ namespace Infrastructure.Repositories
 
         public async virtual Task Delete(Entity entity)
         {
-            _entity.Remove(entity);
-            await _entityContext.SaveChangesAsync();
+            try
+            {
+                _entity.Remove(entity);
+                await _entityContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new Exception(ex.Message + "Não foi possível deletar: ");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + "Não foi possível deletar: ");
+            }
         }
 
         public async virtual Task<Entity> GetById(int id)
         {
-            return await _entity.FindAsync(id);
+            var entity = await _entity.FindAsync(id);
+            if (entity != null)
+                return entity;
+            else
+                throw new Exception("Não foi encontrado objeto com o Id informado!");
         }
 
         public async virtual Task Save(Entity entity)
@@ -43,17 +58,25 @@ namespace Infrastructure.Repositories
                 await _entity.AddAsync(entity);
                 await _entityContext.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception("Não foi possível salvar no Banco de Dados: ");
+                throw new Exception("Não foi possível salvar: ");
             }
 
         }
 
         public async virtual Task Update(Entity entity)
         {
-            _entity.Update(entity);
-            await _entityContext.SaveChangesAsync();
+            try
+            {
+                _entity.Update(entity);
+                await _entityContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception(ex.Message + "Não foi possível atualizar: ");
+            }
+
         }
     }
 }

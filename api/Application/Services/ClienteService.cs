@@ -23,7 +23,14 @@ namespace Application.Services
 
         public async Task<Cliente> GetById(int id)
         {
-            return await _clienteRepository.GetById(id);
+            try
+            {
+                return await _clienteRepository.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task Save(Cliente cliente)
@@ -41,12 +48,27 @@ namespace Application.Services
 
         public async Task Delete(Cliente cliente)
         {
-            await _clienteRepository.Delete(cliente);
+
+            try
+            {
+                await _clienteRepository.Delete(cliente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + $"{cliente.GetType().Name}");
+            }
         }
 
         public async Task Update(Cliente cliente)
         {
-            await _clienteRepository.Update(cliente);
+            try
+            {
+                await _clienteRepository.Update(cliente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + $"{cliente.GetType().Name}");
+            }
         }
     }
 }

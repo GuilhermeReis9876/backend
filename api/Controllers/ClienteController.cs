@@ -36,7 +36,7 @@ namespace Controllers
             var clientes = await _service.GetClientes();
             var clientesVM = new List<UsuarioViewModel>();
 
-            foreach(var cliente in clientes)
+            foreach (var cliente in clientes)
             {
                 clientesVM.Add(_mapper.Map<UsuarioViewModel>(cliente));
             }
@@ -46,9 +46,16 @@ namespace Controllers
 
         [Route("GetById/{id}")]
         [HttpGet]
-        public async Task<Cliente> GetById(int id)
+        public async Task<UsuarioViewModel> GetById(int id)
         {
-            return await _service.GetById(id);
+            try
+            {
+                return _mapper.Map<UsuarioViewModel>(await _service.GetById(id));
+            }
+            catch (Exception ex)
+            {
+                return new UsuarioViewModel { Error = ex.Message };
+            }
         }
 
         [Route("Create")]
@@ -74,20 +81,49 @@ namespace Controllers
 
         }
 
-        [Route("Update")]
+        [Route("Update/{id}")]
         [HttpPut]
-        public async Task Update([FromBody] Cliente cliente)
+        public async Task<IActionResult> Update(int id, [FromBody] UsuarioViewModel clienteVM)
         {
-            await _service.Update(cliente);
+            try
+            {
+                var cliente = _mapper.Map<Cliente>(clienteVM);
+
+                cliente.Id = id;
+                await _service.Update(cliente);
+
+                return StatusCode(200, "atualizado com sucesso!");
+            }
+            catch (AutoMapperMappingException amex)
+            {
+                return StatusCode(400, amex.InnerException.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+
         }
 
-        [Route("Delete")]
+        [Route("Delete/{id}")]
         [HttpDelete]
-        public async Task Delete([FromBody] Cliente cliente)
+        public async Task<IActionResult> Delete(int id)
         {
-            await _service.Delete(cliente);
-        }
+            try
+            {
+                await _service.Delete(await _service.GetById(id));
 
+                return StatusCode(200, "Deletado com sucesso!");
+            }
+            catch (AutoMapperMappingException amex)
+            {
+                return StatusCode(400, amex.InnerException.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+        }
 
     }
 }
