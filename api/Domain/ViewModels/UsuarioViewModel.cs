@@ -1,4 +1,6 @@
-﻿namespace api.Domain.ViewModels
+﻿using api.Models.Entities;
+
+namespace api.Domain.ViewModels
 {
     public class UsuarioViewModel
     {
@@ -12,6 +14,10 @@
 
         public string DiaDeNascimento { get; set; }
 
+        public EnumTipoDeUsuario TipoUsuário { get; set; }
+
         public string Error { get; set; }
+
+
     }
 }

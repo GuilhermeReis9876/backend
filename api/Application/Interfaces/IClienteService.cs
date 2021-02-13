@@ -1,3 +1,4 @@
+using api.Domain.ViewModels;
 using api.Models.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Application.Interfaces
 
         Task<Cliente> GetById(int id);
 
-        Task Save(Cliente cliente);
+        Task Save(UsuarioViewModel cliente);
 
         Task Delete(Cliente cliente);
 

@@ -1,8 +1,12 @@
+using api.Domain.ViewModels;
 using api.Models.Entities;
 using Application.Interfaces;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Services
@@ -33,8 +37,19 @@ namespace Application.Services
             }
         }
 
-        public async Task Save(Cliente cliente)
+        public async Task Save(UsuarioViewModel clienteVM)
         {
+            var hmac = new HMACSHA512();
+            var cliente = new Cliente()
+            {
+                Nome = clienteVM.Nome,
+                DiaDeNascimento = DateTime.ParseExact(clienteVM.DiaDeNascimento, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                Cpf = clienteVM.Cpf,
+                PassworkHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(clienteVM.Senha)),
+                PasswordSalt = hmac.Key,
+
+            };
+
             try
             {
                 await _clienteRepository.Save(cliente);

@@ -3,9 +3,7 @@ using Application.Interfaces;
 using Application.Services;
 using Domain.Interfaces;
 using Infrastructure.Repositories;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 
 namespace api.IoC
 {
@@ -24,7 +22,7 @@ namespace api.IoC
 
             services.AddAutoMapper(typeof(AutoMapperProfile));
 
-            
+
 
         }
     }

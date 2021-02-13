@@ -1,16 +1,15 @@
-using System;
-using System.Threading.Tasks;
 using api.Domain.ViewModels;
-using api.Models.Entities;
 using Application.Interfaces;
 using Domain.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class LoginService: ILoginService
+    public class LoginService : ILoginService
     {
         private IClienteRepository _clienteRepository;
-        public ITokenService _tokenService; 
+        public ITokenService _tokenService;
 
         public LoginService(IClienteRepository clienteRepository, ITokenService tokenService)
         {
@@ -30,6 +29,17 @@ namespace Application.Services
                 Usuario = login,
                 Token = _tokenService.CreateToken(user)
             };
+        }
+
+        public async Task<bool> UserExists(string login)
+        {
+            var user = await _clienteRepository.UserExists(login);
+
+            if (user == null)
+                return false;
+            else
+                return true;
+
         }
     }
 }

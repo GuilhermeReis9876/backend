@@ -3,7 +3,6 @@ using api.Domain.ViewModels;
 using api.Models.Entities;
 using Application.Interfaces;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,26 +14,29 @@ namespace Controllers
 
     public class ClienteController : BaseApiController
     {
-        private IClienteService _service;
+        private IClienteService _clienteService;
+        private ILoginService _loginService;
         private IMapper _mapper;
 
         public ClienteController(
             ILogger<ClienteController> logger,
             IClienteService service,
+            ILoginService loginService,
             IMapper mapper
 
         ) :
             base(logger, mapper)
         {
             _mapper = mapper;
-            _service = service;
+            _clienteService = service;
+            _loginService = loginService;
         }
 
         [Route("List")]
         [HttpGet]
         public async Task<IEnumerable<UsuarioViewModel>> GetAll()
         {
-            var clientes = await _service.GetClientes();
+            var clientes = await _clienteService.GetClientes();
             var clientesVM = new List<UsuarioViewModel>();
 
             foreach (var cliente in clientes)
@@ -51,7 +53,7 @@ namespace Controllers
         {
             try
             {
-                return _mapper.Map<UsuarioViewModel>(await _service.GetById(id));
+                return _mapper.Map<UsuarioViewModel>(await _clienteService.GetById(id));
             }
             catch (Exception ex)
             {
@@ -59,28 +61,29 @@ namespace Controllers
             }
         }
 
-        [Route("Create")]
-        [HttpPost]
-        public async Task<IActionResult> Save([FromBody] UsuarioViewModel clienteVM)
-        {
-            try
-            {
-                var cliente = _mapper.Map<Cliente>(clienteVM);
-                cliente.TipoDeUsuario = EnumTipoDeUsuario.CLIENTE;
+        //[Route("Create")]
+        //[HttpPost]
+        //public async Task<IActionResult> Save([FromBody] UsuarioViewModel clienteVM)
+        //{
+        //    try
+        //    {
 
-                await _service.Save(cliente);
-                return StatusCode(200, $"{cliente.Nome} adicionado com sucesso!");
-            }
-            catch (AutoMapperMappingException amex)
-            {
-                return StatusCode(400, amex.InnerException.Message);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(400, ex.Message);
-            }
+        //        if (await _loginService.UserExists(clienteVM.Cpf))
+        //            return BadRequest("Usuário já cadastrado!");
 
-        }
+        //        await _clienteService.Save(clienteVM);
+        //        return StatusCode(200, $"{clienteVM.Nome} adicionado com sucesso!");
+        //    }
+        //    catch (AutoMapperMappingException amex)
+        //    {
+        //        return StatusCode(400, amex.InnerException.Message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(400, ex.Message);
+        //    }
+
+        //}
 
         [Route("Update/{id}")]
         [HttpPut]
@@ -91,7 +94,7 @@ namespace Controllers
                 var cliente = _mapper.Map<Cliente>(clienteVM);
 
                 cliente.Id = id;
-                await _service.Update(cliente);
+                await _clienteService.Update(cliente);
 
                 return StatusCode(200, "atualizado com sucesso!");
             }
@@ -112,7 +115,7 @@ namespace Controllers
         {
             try
             {
-                await _service.Delete(await _service.GetById(id));
+                await _clienteService.Delete(await _clienteService.GetById(id));
 
                 return StatusCode(200, "Deletado com sucesso!");
             }

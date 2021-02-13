@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using api.Models.Entities;
+﻿using api.Models.Entities;
+using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {

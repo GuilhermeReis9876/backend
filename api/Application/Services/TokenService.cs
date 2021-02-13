@@ -1,13 +1,12 @@
-using api.Domain.ViewModels;
+using api.Models.Entities;
 using Application.Interfaces;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using api.Models.Entities;
 
 namespace Application.Services
 {
@@ -35,9 +34,10 @@ namespace Application.Services
 
             // Describing token
             var tokenDescriptor =
-                new SecurityTokenDescriptor {
+                new SecurityTokenDescriptor
+                {
                     Subject = new ClaimsIdentity(claims),
-                    Expires = DateTime.Now.AddDays(3),  
+                    Expires = DateTime.Now.AddDays(3),
                     SigningCredentials = creds
                 };
 
@@ -48,6 +48,6 @@ namespace Application.Services
 
             return tokenHandler.WriteToken(token);
         }
-       
+
     }
 }
