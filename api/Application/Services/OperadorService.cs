@@ -28,6 +28,7 @@ namespace api.Application.Services
                 Matricula = operadorVM.Matricula,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(operadorVM.Senha)),
                 PasswordSalt = hmac.Key,
+                TipoDeUsuario = operadorVM.TipoUsuario
             };
 
             try

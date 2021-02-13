@@ -47,7 +47,7 @@ namespace Application.Services
                 Cpf = clienteVM.Cpf,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(clienteVM.Senha)),
                 PasswordSalt = hmac.Key,
-
+                TipoDeUsuario = clienteVM.TipoUsuario
             };
 
             try

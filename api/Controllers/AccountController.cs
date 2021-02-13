@@ -69,6 +69,9 @@ namespace Controllers
             }
             else if (usuarioVM.TipoUsuario == EnumTipoDeUsuario.OPERADOR)
             {
+                if (usuarioVM.Matricula == null)
+                    return BadRequest($"Matricula não pode ser vazia!");
+
                 if (await _loginService.UserExists(usuarioVM.Matricula))
                     return BadRequest($"Operador {usuarioVM.Nome} ja cadastrado!");
 
