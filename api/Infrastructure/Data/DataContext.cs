@@ -1,6 +1,6 @@
-using System;
 using api.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Infrastructure.Data
 {
@@ -18,7 +18,7 @@ namespace Infrastructure.Data
         public DbSet<Marca> Marcas { get; set; }
         public DbSet<Modelo> Modelos { get; set; }
         public DbSet<Veiculo> Veiculos { get; set; }
-        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using api.Models.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
-using api.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories
         private DataContext _context;
         private readonly DbSet<Cliente> _clientes;
 
-        public ClienteRepository(DataContext context): base(context)
+        public ClienteRepository(DataContext context) : base(context)
         {
             _context = context;
             _clientes = context.Set<Cliente>();
@@ -20,7 +20,7 @@ namespace Infrastructure.Repositories
 
         public override async Task<IEnumerable<Cliente>> GetAll()
         {
-            return await _clientes.Include( x => x.Endereco).ToListAsync();
+            return await _clientes.Include(x => x.Endereco).ToListAsync();
         }
 
     }

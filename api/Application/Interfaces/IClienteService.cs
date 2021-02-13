@@ -1,6 +1,6 @@
+using api.Models.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using api.Models.Entities;
 
 namespace Application.Interfaces
 {

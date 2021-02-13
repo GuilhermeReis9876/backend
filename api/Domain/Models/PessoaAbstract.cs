@@ -10,7 +10,7 @@ namespace api.Models.Entities
         public DateTime DiaDeNascimento { get; set; }
 
         [ForeignKey("Endereco")]
-        public int EnderecoId { get; set; }
+        public int? EnderecoId { get; set; }
         public Endereco Endereco { get; set; }
     }
 }

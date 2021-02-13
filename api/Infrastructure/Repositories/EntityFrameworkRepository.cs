@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using api.Models.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -25,24 +25,35 @@ namespace Infrastructure.Repositories
             return await _entity.ToListAsync();
         }
 
-        public virtual Task Delete(Entity entity)
+        public async virtual Task Delete(Entity entity)
         {
-            throw new NotImplementedException();
+            _entity.Remove(entity);
+            await _entityContext.SaveChangesAsync();
         }
 
-        public virtual Task<Entity> GetById(int id)
+        public async virtual Task<Entity> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _entity.FindAsync(id);
         }
 
-        public virtual Task Save(Entity entity)
+        public async virtual Task Save(Entity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _entity.AddAsync(entity);
+                await _entityContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível salvar no Banco de Dados: ");
+            }
+
         }
 
-        public virtual Task Update(Entity entity)
+        public async virtual Task Update(Entity entity)
         {
-            throw new NotImplementedException();
+            _entity.Update(entity);
+            await _entityContext.SaveChangesAsync();
         }
     }
 }

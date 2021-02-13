@@ -1,8 +1,9 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using api.Models.Entities;
 using Application.Interfaces;
 using Domain.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Application.Services
 {
@@ -27,7 +28,15 @@ namespace Application.Services
 
         public async Task Save(Cliente cliente)
         {
-            await _clienteRepository.Save(cliente);
+            try
+            {
+                await _clienteRepository.Save(cliente);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + $"{cliente.GetType().Name}");
+            }
+
         }
 
         public async Task Delete(Cliente cliente)

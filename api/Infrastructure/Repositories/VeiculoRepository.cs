@@ -1,6 +1,6 @@
+using api.Models.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
-using api.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
@@ -10,7 +10,7 @@ namespace Infrastructure.Repositories
         private DataContext _context;
         private readonly DbSet<Veiculo> _veiculos;
 
-        public VeiculoRepository(DataContext context): base(context)
+        public VeiculoRepository(DataContext context) : base(context)
         {
             _context = context;
             _veiculos = context.Set<Veiculo>();

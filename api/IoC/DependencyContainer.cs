@@ -1,3 +1,4 @@
+using api.Infrastructure.DtoHandler;
 using Application.Interfaces;
 using Application.Services;
 using Domain.Interfaces;
@@ -13,8 +14,12 @@ namespace api.IoC
             // Application Layer
             services.AddScoped<IClienteService, ClienteService>();
             //Infrastructure Layer
+
             services.AddScoped<IClienteRepository, ClienteRepository>();
-            
+
+
+            services.AddAutoMapper(typeof(AutoMapperProfile));
+
         }
     }
 }

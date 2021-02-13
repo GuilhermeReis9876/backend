@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using api.Models.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
-using api.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
@@ -12,7 +10,7 @@ namespace Infrastructure.Repositories
         private DataContext _context;
         private readonly DbSet<LocacaoVeiculo> _locacaoVeiculo;
 
-        public LocacaoVeiculoRepository(DataContext context): base(context)
+        public LocacaoVeiculoRepository(DataContext context) : base(context)
         {
             _context = context;
             _locacaoVeiculo = context.Set<LocacaoVeiculo>();
