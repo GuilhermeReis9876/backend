@@ -1,7 +1,8 @@
 ﻿namespace api.Domain.ViewModels
 {
-    public class ClienteViewModel
+    public class UsuarioViewModel
     {
+        public string Matricula { get; set; } 
         public string Cpf { get; set; }
 
         public string Senha { get; set; }

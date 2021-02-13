@@ -31,9 +31,17 @@ namespace Controllers
 
         [Route("List")]
         [HttpGet]
-        public async Task<IEnumerable<Cliente>> GetAll()
+        public async Task<IEnumerable<UsuarioViewModel>> GetAll()
         {
-            return await _service.GetClientes();
+            var clientes = await _service.GetClientes();
+            var clientesVM = new List<UsuarioViewModel>();
+
+            foreach(var cliente in clientes)
+            {
+                clientesVM.Add(_mapper.Map<UsuarioViewModel>(cliente));
+            }
+
+            return clientesVM;
         }
 
         [Route("GetById/{id}")]
@@ -45,7 +53,7 @@ namespace Controllers
 
         [Route("Create")]
         [HttpPost]
-        public async Task<IActionResult> Save([FromBody] ClienteViewModel clienteVM)
+        public async Task<IActionResult> Save([FromBody] UsuarioViewModel clienteVM)
         {
             try
             {
