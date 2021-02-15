@@ -17,12 +17,14 @@ namespace api.IoC
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IOperadorService, OperadorService>();
+            services.AddScoped<IVeiculoService, VeiculoService>();
 
 
             //Infrastructure Layer
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IOperadorRepository, OperadorRepository>();
+            services.AddScoped<IVeiculoRepository, VeiculoRepository>();
 
             //Infrastructure Utils
             services.AddAutoMapper(typeof(AutoMapperProfile));
