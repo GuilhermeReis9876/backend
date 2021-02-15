@@ -50,6 +50,15 @@ namespace api.Infrastructure.DtoHandler
               .ForMember(dest => dest.Modelo, opt => opt.MapFrom(src => src.Modelo.Name))
               .ForMember(dest => dest.Marca, opt => opt.MapFrom(src => src.Modelo.Marca.Name));
 
+            CreateMap<Modelo, ModeloViewModel>()
+              .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+              .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Name))
+              .ForMember(dest => dest.MarcaId, opt => opt.MapFrom(src => src.MarcaId));
+
+            CreateMap<Marca, MarcaViewModel>()
+              .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+              .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Name));
+
         }
     }
 }
