@@ -48,11 +48,43 @@ namespace api.Application.Services
 
             var diasParaAlugar = (locacaoVeiculoVM.DataDevolucao - locacaoVeiculoVM.DataLocacao).Days;
 
+            locacaoVeiculoVM.LocacoesConflitantes = new HashSet<string>();
+
+            if (diasParaAlugar == 0)
+            {
+                var locacoesDoDia = locacoesDesteVeiculo.Where(x => locacaoVeiculoVM.DataLocacao == x.DataLocacao.Date || locacaoVeiculoVM.DataLocacao.Date == x.DataDevolucao.Date).ToList();
+                if(locacoesDoDia.Count == 0)
+                {
+                    locacaoVeiculoVM.TotalHoras = (int)(locacaoVeiculoVM.DataDevolucao - locacaoVeiculoVM.DataLocacao).TotalHours;
+                    locacaoVeiculoVM.ValorLocacao = veiculo.ValorHora * locacaoVeiculoVM.TotalHoras;
+
+                    try
+                    {
+                        await _locacaoVeiculoRepository.Save(_mapper.Map<LocacaoVeiculo>(locacaoVeiculoVM));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                }
+                else
+                {
+                    foreach(var loc in locacoesDoDia)
+                    {
+                        locacaoVeiculoVM.LocacoesConflitantes.Add(loc.DataLocacao.ToString("dd/MM/yyyy") + "- até: " + loc.DataDevolucao.ToString("dd/MM/yyyy"));
+                    }
+                   
+                }
+
+                return locacaoVeiculoVM;
+            }
+                
+
             var diaLocado = locacaoVeiculoVM.DataLocacao;
 
             locacaoVeiculoVM.LocacoesConflitantes = new HashSet<string>();
 
-            for (var dias = 1; dias <= diasParaAlugar; dias++)
+            for (var dias = 0; dias < diasParaAlugar; dias++)
             {
                 var locacaoParaODia = locacoesDesteVeiculo.Where(x => diaLocado >= x.DataLocacao && diaLocado <= x.DataDevolucao).SingleOrDefault();
                 if (locacaoParaODia == null)
