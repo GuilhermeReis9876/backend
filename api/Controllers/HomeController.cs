@@ -1,0 +1,32 @@
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace api.Controllers
+{
+    public class HomeController : BaseApiController
+    {
+
+
+        public HomeController(
+            ILogger<HomeController> logger, 
+            IMapper mapper
+            ) :
+            base(logger, mapper)
+        {        }
+
+        [HttpGet]
+        [Route("/")]
+        [AllowAnonymous]
+        public IActionResult Home()
+        {
+            return Redirect("/swagger/index.html");
+        }
+
+    }
+}
