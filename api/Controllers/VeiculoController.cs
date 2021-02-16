@@ -1,31 +1,36 @@
-using api.Controllers;
-using api.Domain.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Application.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using api.Controllers;
+using api.Domain.ViewModels;
+using Domain.ViewModels;
+using api.Models.Entities;
 
 namespace Controllers
 {
-
     public class VeiculoController : BaseApiController
     {
         private IVeiculoService _veiculoService;
+
+        private IEnumService _enumService;
+
         private IMapper _mapper;
 
         public VeiculoController(
             ILogger<VeiculoController> logger,
             IVeiculoService service,
+            IEnumService enumService,
             IMapper mapper
-
         ) :
             base(logger, mapper)
         {
             _mapper = mapper;
             _veiculoService = service;
+            _enumService = enumService;
         }
 
         [Route("List")]
@@ -57,7 +62,8 @@ namespace Controllers
             try
             {
                 var veiculos = await _veiculoService.GetVeiculoById(id);
-                VeiculoViewModel veiculosVM = _mapper.Map<VeiculoViewModel>(veiculos);
+                VeiculoViewModel veiculosVM =
+                    _mapper.Map<VeiculoViewModel>(veiculos);
                 return veiculosVM;
             }
             catch (Exception ex)
@@ -66,5 +72,18 @@ namespace Controllers
             }
         }
 
+        [Route("Categorias")]
+        [HttpGet]
+        public List<EnumViewModel> GetCategorias()
+        {
+            return _enumService.GetValues<EnumTipoDeVeiculo>();
+        }
+
+        [Route("Combustiveis")]
+        [HttpGet]
+        public List<EnumViewModel> GetCombustiveis()
+        {
+            return _enumService.GetValues<EnumTipoDeCombustivel>();
+        }
     }
 }

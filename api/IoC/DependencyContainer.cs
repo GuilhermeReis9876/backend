@@ -21,6 +21,7 @@ namespace api.IoC
             services.AddScoped<IModeloService, ModeloService>();
             services.AddScoped<IMarcaService, MarcaService>();
             services.AddScoped<ILocacaoVeiculoService, LocacaoVeiculoService>();
+            services.AddScoped<IEnumService, EnumService>();
 
 
             //Infrastructure Layer
