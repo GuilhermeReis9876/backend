@@ -58,10 +58,6 @@ namespace api
                 });
 
 
-
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,14 +76,9 @@ namespace api
               .AllowAnyMethod()
               .AllowAnyHeader());
 
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "api v1"));
-
-
             UpdateDatabase(app);
-            app.UseHttpsRedirection();
 
+            app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseAuthentication();
@@ -97,6 +88,9 @@ namespace api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "api v1"));
         }
 
         private static void UpdateDatabase(IApplicationBuilder app)
