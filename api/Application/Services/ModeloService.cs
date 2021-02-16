@@ -1,12 +1,8 @@
-using api.Domain.ViewModels;
 using api.Models.Entities;
 using Application.Interfaces;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Services
@@ -25,9 +21,9 @@ namespace Application.Services
             try
             {
                 var result = await _modeloRepository.GetAll();
-                
-                if(result == null) return null;
-                
+
+                if (result == null) return null;
+
                 return result;
             }
             catch (Exception ex)

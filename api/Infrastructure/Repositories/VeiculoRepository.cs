@@ -1,10 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using api.Models.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -23,7 +23,7 @@ namespace Infrastructure.Repositories
         {
             return await _context.Veiculos
                 .Where(m => m.ModeloId == m.ModeloId)
-                .Where(m=> m.Id == id)
+                .Where(m => m.Id == id)
                 .Include(m => m.Modelo)
                 .Include(m => m.Modelo.Marca)
                 .FirstOrDefaultAsync();
@@ -35,7 +35,7 @@ namespace Infrastructure.Repositories
                 .Where(m => m.ModeloId == m.ModeloId)
                 .Include(m => m.Modelo)
                 .Include(m => m.Modelo.Marca)
-                .ToListAsync();   
+                .ToListAsync();
         }
 
     }

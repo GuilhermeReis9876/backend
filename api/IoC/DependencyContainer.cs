@@ -20,6 +20,7 @@ namespace api.IoC
             services.AddScoped<IVeiculoService, VeiculoService>();
             services.AddScoped<IModeloService, ModeloService>();
             services.AddScoped<IMarcaService, MarcaService>();
+            services.AddScoped<ILocacaoVeiculoService, LocacaoVeiculoService>();
 
 
             //Infrastructure Layer
@@ -29,6 +30,8 @@ namespace api.IoC
             services.AddScoped<IVeiculoRepository, VeiculoRepository>();
             services.AddScoped<IModeloRepository, ModeloRepository>();
             services.AddScoped<IMarcaRepository, MarcaRepository>();
+            services.AddScoped<ILocacaoVeiculoRepository, LocacaoVeiculoRepository>();
+
 
             //Infrastructure Utils
             services.AddAutoMapper(typeof(AutoMapperProfile));

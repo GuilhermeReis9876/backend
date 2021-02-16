@@ -20,5 +20,7 @@ namespace api.Models.Entities
         public DateTime DataLocacao { get; set; }
 
         public DateTime DataDevolucao { get; set; }
+
+        public double ValorLocacao { get; set; }
     }
 }

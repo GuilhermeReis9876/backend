@@ -59,6 +59,14 @@ namespace api.Infrastructure.DtoHandler
               .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
               .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Name));
 
+            CreateMap<LocacaoVeiculoViewModel, LocacaoVeiculo>()
+                .ForMember(dest => dest.ClienteId, opt => opt.MapFrom(src => src.ClienteId))
+                .ForMember(dest => dest.VeiculoId, opt => opt.MapFrom(src => src.VeiculoId))
+                .ForMember(dest => dest.ClienteId, opt => opt.MapFrom(src => src.ClienteId))
+                .ForMember(dest => dest.DataLocacao, opt => opt.MapFrom(src => src.DataLocacao))
+                .ForMember(dest => dest.DataDevolucao, opt => opt.MapFrom(src => src.DataDevolucao))
+                .ForMember(dest => dest.TotalHoras, opt => opt.MapFrom(src => src.TotalHoras));
+
         }
     }
 }

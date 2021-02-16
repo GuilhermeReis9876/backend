@@ -1,19 +1,20 @@
-﻿using api.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace api.Domain.ViewModels
 {
     public class SimulacaoViewModel
     {
-        public Veiculo veiculo { get; set; }
+        public int VeiculoId { get; set; }
 
         public DateTime Entrada { get; set; }
 
         public DateTimeOffset Saida { get; set; }
 
         public double ValorSimulado { get; set; }
+
+        public int TotalHoras { get; set; }
+
+        public string Error { get; set; }
+
     }
 }

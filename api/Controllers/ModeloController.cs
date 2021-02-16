@@ -1,6 +1,5 @@
 using api.Controllers;
 using api.Domain.ViewModels;
-using api.Models.Entities;
 using Application.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -45,7 +44,7 @@ namespace Controllers
 
                 return modelosVM;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

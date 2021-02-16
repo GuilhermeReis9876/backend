@@ -1,4 +1,3 @@
-using System;
 using api.Models.Entities;
 
 namespace api.Domain.ViewModels
@@ -23,9 +22,9 @@ namespace api.Domain.ViewModels
 
         public bool EstaLocado { get; set; }
 
-        public int MarcaId {get ;set ;}
+        public int MarcaId { get; set; }
 
-        public string Marca {get;set;}
+        public string Marca { get; set; }
 
         public int ModeloId { get; set; }
 

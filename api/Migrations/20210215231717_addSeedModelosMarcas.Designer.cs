@@ -4,14 +4,16 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210215231717_addSeedModelosMarcas")]
+    partial class addSeedModelosMarcas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,16 +88,6 @@ namespace api.Migrations
                     b.HasIndex("EnderecoId");
 
                     b.ToTable("Clientes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = -2,
-                            Cpf = "876.678.543.67",
-                            DiaDeNascimento = new DateTime(1992, 12, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Nome = "Fulano da Silva",
-                            TipoDeUsuario = 1
-                        });
                 });
 
             modelBuilder.Entity("api.Models.Entities.Endereco", b =>
@@ -147,9 +139,6 @@ namespace api.Migrations
                     b.Property<int>("TotalHoras")
                         .HasColumnType("int");
 
-                    b.Property<double>("ValorLocacao")
-                        .HasColumnType("float");
-
                     b.Property<int>("VeiculoId")
                         .HasColumnType("int");
 
@@ -160,18 +149,6 @@ namespace api.Migrations
                     b.HasIndex("VeiculoId");
 
                     b.ToTable("LocacaoVeiculos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = -2,
-                            ClienteId = -2,
-                            DataDevolucao = new DateTime(2021, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataLocacao = new DateTime(2021, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TotalHoras = 48,
-                            ValorLocacao = 91.900000000000006,
-                            VeiculoId = 1
-                        });
                 });
 
             modelBuilder.Entity("api.Models.Entities.Marca", b =>
@@ -345,21 +322,6 @@ namespace api.Migrations
                     b.HasIndex("ModeloId");
 
                     b.ToTable("Veiculos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Ano = new DateTime(2013, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EstaLocado = false,
-                            Kilometragem = 0,
-                            LimitePortaMalas = 0,
-                            ModeloId = 7,
-                            Placa = "XXX-0909",
-                            TipoDeCombustivel = 0,
-                            TipoDeVeiculo = 0,
-                            ValorHora = 45.950000000000003
-                        });
                 });
 
             modelBuilder.Entity("api.Models.Entities.CheckList", b =>
