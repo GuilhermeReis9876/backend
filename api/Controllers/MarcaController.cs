@@ -2,6 +2,7 @@ using api.Controllers;
 using api.Domain.ViewModels;
 using Application.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -30,6 +31,7 @@ namespace Controllers
 
         [Route("List")]
         [HttpGet]
+        [Authorize]
         public async Task<IEnumerable<MarcaViewModel>> GetAll()
         {
             try
@@ -52,6 +54,7 @@ namespace Controllers
 
         [Route("GetById/{id}")]
         [HttpGet]
+        [Authorize]
         public async Task<MarcaViewModel> GetById(int id)
         {
             try

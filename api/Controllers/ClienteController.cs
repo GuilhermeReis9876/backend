@@ -3,6 +3,7 @@ using api.Domain.ViewModels;
 using api.Models.Entities;
 using Application.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -49,6 +50,7 @@ namespace Controllers
 
         [Route("GetById/{id}")]
         [HttpGet]
+        [Authorize]
         public async Task<UsuarioResponseViewModel> GetById(int id)
         {
             try
@@ -63,6 +65,7 @@ namespace Controllers
 
         [Route("Update/{id}")]
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Update(int id, [FromBody] UsuarioUpdateViewModel clienteVM)
         {
             try
@@ -87,6 +90,7 @@ namespace Controllers
 
         [Route("Delete/{id}")]
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             try

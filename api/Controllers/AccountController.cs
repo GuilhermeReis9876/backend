@@ -4,6 +4,7 @@ using api.Models.Entities;
 using Application.Interfaces;
 using AutoMapper;
 using CpfLibrary;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -35,16 +36,18 @@ namespace Controllers
         }
 
         [HttpPost("login")]
+        [Authorize]
         public async Task<ActionResult<LoginViewModel>> Login(string login, string senha)
         {
             return await _loginService.ValidateUser(login, senha);
         }
 
         [HttpPost("create")]
+        [Authorize]
         public async Task<IActionResult> Create(UsuarioViewModel usuarioVM)
         {
             if (string.IsNullOrEmpty(usuarioVM.Nome))
-                return BadRequest("Nome é requerido para cadastro!");
+                return BadRequest("Nome ï¿½ requerido para cadastro!");
 
             if (usuarioVM.TipoUsuario == EnumTipoDeUsuario.CLIENTE)
             {
@@ -64,13 +67,13 @@ namespace Controllers
                 }
                 else
                 {
-                    return BadRequest("CPF inserido não é um CPF válido!");
+                    return BadRequest("CPF inserido nï¿½o ï¿½ um CPF vï¿½lido!");
                 }
             }
             else if (usuarioVM.TipoUsuario == EnumTipoDeUsuario.OPERADOR)
             {
                 if (usuarioVM.Matricula == null)
-                    return BadRequest($"Matricula não pode ser vazia!");
+                    return BadRequest($"Matricula nï¿½o pode ser vazia!");
 
                 if (await _loginService.UserExists(usuarioVM.Matricula))
                     return BadRequest($"Operador {usuarioVM.Nome} ja cadastrado!");
@@ -86,7 +89,7 @@ namespace Controllers
                 }
             }
 
-            return BadRequest("Não foi possível efetuar o cadastrar");
+            return BadRequest("Nï¿½o foi possï¿½vel efetuar o cadastrar");
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using api.Domain.ViewModels;
 using Application.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,6 +28,7 @@ namespace api.Controllers
 
         [Route("Agendar")]
         [HttpPost]
+        [Authorize]
         public async Task<LocacaoVeiculoViewModel> Agendar(LocacaoVeiculoViewModel locacaoVeiculoVM)
         {
             try
@@ -44,6 +46,7 @@ namespace api.Controllers
 
         [Route("Simular")]
         [HttpPost]
+        [Authorize]
         public async Task<SimulacaoViewModel> Simular(SimulacaoViewModel simulacaoVM)
         {
             try

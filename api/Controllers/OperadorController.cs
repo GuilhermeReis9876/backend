@@ -2,6 +2,7 @@
 using api.Models.Entities;
 using Application.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -32,6 +33,7 @@ namespace api.Controllers
         }
         [Route("List")]
         [HttpGet]
+        [Authorize]
         public async Task<IEnumerable<UsuarioResponseViewModel>> GetAll()
         {
             var clientes = await _operadorService.GetOperadores();
@@ -47,6 +49,7 @@ namespace api.Controllers
 
         [Route("GetById/{id}")]
         [HttpGet]
+        [Authorize]
         public async Task<UsuarioResponseViewModel> GetById(int id)
         {
             try
@@ -61,6 +64,7 @@ namespace api.Controllers
 
         [Route("Update/{id}")]
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Update(int id, [FromBody] UsuarioUpdateViewModel operadorVM)
         {
             try
@@ -85,6 +89,7 @@ namespace api.Controllers
 
         [Route("Delete/{id}")]
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             try

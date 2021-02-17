@@ -9,6 +9,7 @@ using api.Controllers;
 using api.Domain.ViewModels;
 using Domain.ViewModels;
 using api.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Controllers
 {
@@ -35,6 +36,7 @@ namespace Controllers
 
         [Route("List")]
         [HttpGet]
+        [Authorize]
         public async Task<IEnumerable<VeiculoViewModel>> GetAll()
         {
             try
@@ -57,6 +59,7 @@ namespace Controllers
 
         [Route("GetById/{id}")]
         [HttpGet]
+        [Authorize]
         public async Task<VeiculoViewModel> GetById(int id)
         {
             try
@@ -74,6 +77,7 @@ namespace Controllers
 
         [Route("Categorias")]
         [HttpGet]
+        [Authorize]
         public List<EnumViewModel> GetCategorias()
         {
             return _enumService.GetValues<EnumTipoDeVeiculo>();
@@ -81,6 +85,7 @@ namespace Controllers
 
         [Route("Combustiveis")]
         [HttpGet]
+        [Authorize]
         public List<EnumViewModel> GetCombustiveis()
         {
             return _enumService.GetValues<EnumTipoDeCombustivel>();
