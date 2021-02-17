@@ -17,13 +17,15 @@ namespace api.Controllers
         private IMapper _mapper;
         private ILoginService _loginService;
         public IOperadorService _operadorService;
+        private ITokenService _tokenService;
 
         public AccountController(
             ILogger<AccountController> logger,
             IClienteService clienteService,
             IOperadorService operadorService,
             IMapper mapper,
-            ILoginService loginService
+            ILoginService loginService,
+            ITokenService tokenService
 
         ) :
             base(logger, mapper)
@@ -32,6 +34,7 @@ namespace api.Controllers
             _clienteService = clienteService;
             _loginService = loginService;
             _operadorService = operadorService;
+            _tokenService = tokenService;
         }
 
         [HttpPost("login")]
@@ -50,6 +53,8 @@ namespace api.Controllers
 
             if (usuarioVM.TipoUsuario == EnumTipoDeUsuario.CLIENTE)
             {
+                usuarioVM.Cpf = usuarioVM.Cpf.Replace(".", "").Replace("-", "");
+                
                 if (Cpf.Check(usuarioVM.Cpf))
                 {
                     if (await _loginService.UserExists(usuarioVM.Cpf))
@@ -89,6 +94,15 @@ namespace api.Controllers
             }
 
             return BadRequest("N�o foi poss�vel efetuar o cadastrar");
+        }
+
+        // TESTANDO API
+        [HttpGet]
+        [Authorize]
+        public async Task<object> GetUserId()
+        {
+            var tokenHeader = (string)HttpContext.Request.Headers["Authorization"];
+            return await _tokenService.GetUserByToken(tokenHeader);
         }
 
     }

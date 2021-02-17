@@ -24,12 +24,14 @@ namespace api.Application.Services
 
         public async Task<LoginViewModel> ValidateUser(string login, string senha)
         {
+            login = login.Replace(".", "").Replace("-", "");
+
             var cliente = await _clienteRepository.UserExists(login);
             if (cliente == null)
             {
                 var operador = await _operadorRepository.UserExists(login);
                 if (operador == null)
-                    throw new Exception("Usuário não existe!");
+                    throw new Exception("Usuï¿½rio nï¿½o existe!");
                 else
                 {
                     var hmac = new HMACSHA512(operador.PasswordSalt);
@@ -44,7 +46,7 @@ namespace api.Application.Services
                     return new LoginViewModel
                     {
                         Usuario = login,
-                        Token = _tokenService.CreateToken(operador)
+                        Token = $"Bearer {_tokenService.CreateToken(operador)}"
                     };
 
 
@@ -64,7 +66,7 @@ namespace api.Application.Services
                 return new LoginViewModel
                 {
                     Usuario = login,
-                    Token = _tokenService.CreateToken(cliente)
+                    Token = $"Bearer {_tokenService.CreateToken(cliente)}"
                 };
 
             }

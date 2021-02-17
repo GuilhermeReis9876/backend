@@ -22,5 +22,10 @@ namespace api.Infrastructure.Repositories
             return await _operadores.SingleOrDefaultAsync(x => x.Matricula == register);
         }
 
+        public async Task<Operador> GetUserByRegister(string register)
+        {
+            return await _operadores.SingleOrDefaultAsync(x => x.Matricula == register);
+        }
+
     }
 }
