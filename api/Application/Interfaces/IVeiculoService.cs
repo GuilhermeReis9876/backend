@@ -1,8 +1,8 @@
-using api.Models.Entities;
+using api.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Application.Interfaces
+namespace api.Application.Interfaces
 {
     public interface IVeiculoService
     {

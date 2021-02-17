@@ -1,4 +1,4 @@
-using Application.Interfaces;
+using api.Application.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Application.Services
+namespace api.Application.Services
 {
     public class TokenService : ITokenService
     {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace api.Models.Entities
+namespace api.Domain.Models
 {
     [Table("CheckLists")]
     public class CheckList : BaseModel
@@ -22,5 +22,9 @@ namespace api.Models.Entities
         public int OperadorId { get; set; }
 
         public Operador Operador { get; set; }
+
+        public bool CheckListInicial { get; set; }
+        
+        
     }
 }

@@ -1,9 +1,8 @@
 using api.Application.Services;
 using api.Infrastructure.DtoHandler;
-using Application.Interfaces;
-using Application.Services;
-using Domain.Interfaces;
-using Infrastructure.Repositories;
+using api.Application.Interfaces;
+using api.Domain.Interfaces;
+using api.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace api.IoC
@@ -22,6 +21,7 @@ namespace api.IoC
             services.AddScoped<IMarcaService, MarcaService>();
             services.AddScoped<ILocacaoVeiculoService, LocacaoVeiculoService>();
             services.AddScoped<IEnumService, EnumService>();
+            services.AddScoped<ICheckListService, CheckListService>();
 
 
             //Infrastructure Layer
@@ -32,6 +32,7 @@ namespace api.IoC
             services.AddScoped<IModeloRepository, ModeloRepository>();
             services.AddScoped<IMarcaRepository, MarcaRepository>();
             services.AddScoped<ILocacaoVeiculoRepository, LocacaoVeiculoRepository>();
+            services.AddScoped<ICheckListRepository, CheckListRepository>();
 
 
             //Infrastructure Utils

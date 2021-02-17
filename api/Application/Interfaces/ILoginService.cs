@@ -1,7 +1,7 @@
 using api.Domain.ViewModels;
 using System.Threading.Tasks;
 
-namespace Application.Interfaces
+namespace api.Application.Interfaces
 {
     public interface ILoginService
     {

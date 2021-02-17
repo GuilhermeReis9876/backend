@@ -1,6 +1,5 @@
-using api.Controllers;
 using api.Domain.ViewModels;
-using Application.Interfaces;
+using api.Application.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Controllers
+namespace api.Controllers
 {
 
     public class ModeloController : BaseApiController

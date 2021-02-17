@@ -1,6 +1,6 @@
 ﻿using api.Domain.ViewModels;
-using api.Models.Entities;
-using Application.Interfaces;
+using api.Domain.Models;
+using api.Application.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

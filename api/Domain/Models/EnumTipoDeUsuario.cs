@@ -1,4 +1,4 @@
-namespace api.Models.Entities
+namespace api.Domain.Models
 {
     public enum EnumTipoDeUsuario
     {

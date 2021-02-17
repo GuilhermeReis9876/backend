@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Domain.ViewModels;
+using api.Domain.ViewModels;
 
-namespace Application.Interfaces
+namespace api.Application.Interfaces
 {
     public interface IEnumService
     {

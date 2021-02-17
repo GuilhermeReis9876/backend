@@ -1,7 +1,6 @@
-using api.Controllers;
 using api.Domain.ViewModels;
-using api.Models.Entities;
-using Application.Interfaces;
+using api.Domain.Models;
+using api.Application.Interfaces;
 using AutoMapper;
 using CpfLibrary;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Controllers
+namespace api.Controllers
 {
     public class AccountController : BaseApiController
     {

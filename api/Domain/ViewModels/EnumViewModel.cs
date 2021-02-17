@@ -1,4 +1,4 @@
-namespace Domain.ViewModels
+namespace api.Domain.ViewModels
 {
     public class EnumViewModel
     {

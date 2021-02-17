@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace api.Models.Entities
+namespace api.Domain.Models
 {
     [Table("Marcas")]
     public class Marca : BaseModel

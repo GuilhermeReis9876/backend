@@ -1,4 +1,4 @@
-﻿using api.Models.Entities;
+﻿using api.Domain.Models;
 
 namespace api.Domain.ViewModels
 {

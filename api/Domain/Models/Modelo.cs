@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace api.Models.Entities
+namespace api.Domain.Models
 {
     [Table("Modelos")]
     public class Modelo : BaseModel

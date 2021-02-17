@@ -1,5 +1,5 @@
 ﻿using api.Domain.ViewModels;
-using Application.Interfaces;
+using api.Application.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

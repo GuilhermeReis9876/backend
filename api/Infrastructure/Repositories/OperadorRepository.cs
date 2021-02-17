@@ -1,10 +1,10 @@
-using api.Models.Entities;
-using Domain.Interfaces;
-using Infrastructure.Data;
+using api.Domain.Models;
+using api.Domain.Interfaces;
+using api.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Repositories
+namespace api.Infrastructure.Repositories
 {
     public class OperadorRepository : EntityFrameworkRepository<Operador>, IOperadorRepository
     {

@@ -1,7 +1,7 @@
 using api.Domain.ViewModels;
-using api.Models.Entities;
-using Application.Interfaces;
-using Domain.Interfaces;
+using api.Application.Interfaces;
+using api.Domain.Interfaces;
+using api.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace api.Application.Services
 {
     public class ClienteService : IClienteService
     {

@@ -1,8 +1,8 @@
 ﻿using api.Domain.ViewModels;
-using api.Models.Entities;
-using Application.Interfaces;
+using api.Application.Interfaces;
 using AutoMapper;
-using Domain.Interfaces;
+using api.Domain.Interfaces;
+using api.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +57,7 @@ namespace api.Application.Services
                 {
                     locacaoVeiculoVM.TotalHoras = (int)(locacaoVeiculoVM.DataDevolucao - locacaoVeiculoVM.DataLocacao).TotalHours;
                     locacaoVeiculoVM.ValorLocacao = veiculo.ValorHora * locacaoVeiculoVM.TotalHoras;
+                    locacaoVeiculoVM.Status = EnumStatusLocacao.Pendente;
 
                     try
                     {

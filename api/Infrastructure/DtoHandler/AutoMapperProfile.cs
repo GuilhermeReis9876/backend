@@ -1,5 +1,5 @@
 ﻿using api.Domain.ViewModels;
-using api.Models.Entities;
+using api.Domain.Models;
 using AutoMapper;
 using System;
 using System.Globalization;
@@ -66,6 +66,15 @@ namespace api.Infrastructure.DtoHandler
                 .ForMember(dest => dest.DataLocacao, opt => opt.MapFrom(src => src.DataLocacao))
                 .ForMember(dest => dest.DataDevolucao, opt => opt.MapFrom(src => src.DataDevolucao))
                 .ForMember(dest => dest.TotalHoras, opt => opt.MapFrom(src => src.TotalHoras));
+
+            CreateMap<CheckList, CheckListViewModel>()
+              .ForMember(dest => dest.EstaLimpo, opt => opt.MapFrom(src => src.EstaLimpo))
+              .ForMember(dest => dest.EstaComTanqueCheio, opt => opt.MapFrom(src => src.EstaComTanqueCheio))
+              .ForMember(dest => dest.EstaSemAmassados, opt => opt.MapFrom(src => src.EstaSemAmassados))
+              .ForMember(dest => dest.EstaSemArranhoes, opt => opt.MapFrom(src => src.EstaSemArranhoes))
+              .ForMember(dest => dest.OperadorId, opt => opt.MapFrom(src => src.OperadorId))
+              .ForMember(dest => dest.LocacaoVeiculoId, opt => opt.MapFrom(src => src.LocacaoVeiculoId));
+
 
         }
     }

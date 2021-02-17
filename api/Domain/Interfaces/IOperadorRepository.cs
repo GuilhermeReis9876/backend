@@ -1,7 +1,7 @@
-﻿using api.Models.Entities;
+﻿using api.Domain.Models;
 using System.Threading.Tasks;
 
-namespace Domain.Interfaces
+namespace api.Domain.Interfaces
 {
     public interface IOperadorRepository : IGenericRepository<Operador>
     {

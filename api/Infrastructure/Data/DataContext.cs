@@ -1,7 +1,7 @@
-using api.Models.Entities;
+using api.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Data
+namespace api.Infrastructure.Data
 {
     public class DataContext : DbContext
     {
@@ -93,11 +93,20 @@ namespace Infrastructure.Data
 
             modelBuilder.Entity<Cliente>().HasData(new Cliente
             {
-                Id = -2,
-                Cpf = "876.678.543.67",
+                Id = 1,
+                Cpf = "063.923.720-75",
                 DiaDeNascimento = new System.DateTime(1992, 12, 03),
-                Nome = "Fulano da Silva",
+                Nome = "Fulano da Silva Cliente",
                 TipoDeUsuario = EnumTipoDeUsuario.CLIENTE,
+            });
+
+            modelBuilder.Entity<Operador>().HasData(new Operador
+            {
+                Id = 1,
+                Matricula = "123456",
+                DiaDeNascimento = new System.DateTime(1990, 10, 05),
+                Nome = "Beltrano da Silva Operador",
+                TipoDeUsuario = EnumTipoDeUsuario.OPERADOR,
             });
 
 
@@ -115,8 +124,8 @@ namespace Infrastructure.Data
 
             modelBuilder.Entity<LocacaoVeiculo>().HasData(new LocacaoVeiculo
             {
-                Id = -2,
-                ClienteId = -2,
+                Id = 1,
+                ClienteId = 1,
                 VeiculoId = 1,
                 DataLocacao = new System.DateTime(2021, 02, 20, 00, 00, 00),
                 DataDevolucao = new System.DateTime(2021, 04, 20, 00, 00, 00),

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using api.Domain.Models;
 
 namespace api.Domain.ViewModels
 {
@@ -20,6 +21,8 @@ namespace api.Domain.ViewModels
         public ICollection<string> LocacoesConflitantes { get; set; }/* = new HashSet<string>();*/
 
         public string Error { get; set; }
+
+        public EnumStatusLocacao? Status {get ; set; }
 
     }
 }

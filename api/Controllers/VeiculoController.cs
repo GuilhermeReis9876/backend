@@ -1,17 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Application.Interfaces;
+using api.Application.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using api.Controllers;
 using api.Domain.ViewModels;
-using Domain.ViewModels;
-using api.Models.Entities;
+using api.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Controllers
+namespace api.Controllers
 {
     public class VeiculoController : BaseApiController
     {

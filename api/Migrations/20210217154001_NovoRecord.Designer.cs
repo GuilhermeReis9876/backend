@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210212144633_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210217154001_NovoRecord")]
+    partial class NovoRecord
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,9 @@ namespace api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("CheckListInicial")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("EstaComTanqueCheio")
                         .HasColumnType("bit");
 
@@ -40,7 +43,17 @@ namespace api.Migrations
                     b.Property<bool>("EstaSemArranhoes")
                         .HasColumnType("bit");
 
+                    b.Property<int>("LocacaoVeiculoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OperadorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("LocacaoVeiculoId");
+
+                    b.HasIndex("OperadorId");
 
                     b.ToTable("CheckLists");
                 });
@@ -58,14 +71,17 @@ namespace api.Migrations
                     b.Property<DateTime>("DiaDeNascimento")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EnderecoId")
+                    b.Property<int?>("EnderecoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Senha")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("TipoDeUsuario")
                         .HasColumnType("int");
@@ -79,12 +95,10 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = -1,
-                            Cpf = "111.111.111-11",
-                            DiaDeNascimento = new DateTime(2021, 2, 12, 11, 46, 33, 135, DateTimeKind.Local).AddTicks(9744),
-                            EnderecoId = -1,
-                            Nome = "Primeiro Usuario",
-                            Senha = "senhateste@",
+                            Id = -2,
+                            Cpf = "876.678.543.67",
+                            DiaDeNascimento = new DateTime(1992, 12, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "Fulano da Silva",
                             TipoDeUsuario = 1
                         });
                 });
@@ -117,17 +131,6 @@ namespace api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Enderecos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = -1,
-                            Cep = "00000-000",
-                            Cidade = "Belo Horizonte",
-                            Estado = "MG",
-                            Logradouro = "Rua Fulano de tal, Bairro Beltrano",
-                            Numero = 31
-                        });
                 });
 
             modelBuilder.Entity("api.Models.Entities.LocacaoVeiculo", b =>
@@ -136,12 +139,6 @@ namespace api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CheckListId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CheckelistId")
-                        .HasColumnType("int");
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
@@ -152,24 +149,38 @@ namespace api.Migrations
                     b.Property<DateTime>("DataLocacao")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("EstaLocado")
-                        .HasColumnType("bit");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("TotalHoras")
                         .HasColumnType("int");
+
+                    b.Property<double>("ValorLocacao")
+                        .HasColumnType("float");
 
                     b.Property<int>("VeiculoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CheckListId");
-
                     b.HasIndex("ClienteId");
 
                     b.HasIndex("VeiculoId");
 
                     b.ToTable("LocacaoVeiculos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -2,
+                            ClienteId = -2,
+                            DataDevolucao = new DateTime(2021, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataLocacao = new DateTime(2021, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 0,
+                            TotalHoras = 48,
+                            ValorLocacao = 91.900000000000006,
+                            VeiculoId = 1
+                        });
                 });
 
             modelBuilder.Entity("api.Models.Entities.Marca", b =>
@@ -185,6 +196,18 @@ namespace api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Marcas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Fiat"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Wolkswagen"
+                        });
                 });
 
             modelBuilder.Entity("api.Models.Entities.Modelo", b =>
@@ -205,6 +228,56 @@ namespace api.Migrations
                     b.HasIndex("MarcaId");
 
                     b.ToTable("Modelos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MarcaId = 1,
+                            Name = "Uno"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            MarcaId = 1,
+                            Name = "Palio Attractive"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            MarcaId = 1,
+                            Name = "Argo"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            MarcaId = 1,
+                            Name = "Novo Fiat Strada"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            MarcaId = 2,
+                            Name = "Gol - Gen 5"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            MarcaId = 2,
+                            Name = "Up"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            MarcaId = 2,
+                            Name = "Voyage"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            MarcaId = 2,
+                            Name = "Jetta"
+                        });
                 });
 
             modelBuilder.Entity("api.Models.Entities.Operador", b =>
@@ -217,7 +290,7 @@ namespace api.Migrations
                     b.Property<DateTime>("DiaDeNascimento")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EnderecoId")
+                    b.Property<int?>("EnderecoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Matricula")
@@ -226,8 +299,11 @@ namespace api.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Senha")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("TipoDeUsuario")
                         .HasColumnType("int");
@@ -248,6 +324,9 @@ namespace api.Migrations
 
                     b.Property<DateTime>("Ano")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("EstaLocado")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Kilometragem")
                         .HasColumnType("int");
@@ -275,25 +354,53 @@ namespace api.Migrations
                     b.HasIndex("ModeloId");
 
                     b.ToTable("Veiculos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ano = new DateTime(2013, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstaLocado = false,
+                            Kilometragem = 0,
+                            LimitePortaMalas = 0,
+                            ModeloId = 7,
+                            Placa = "XXX-0909",
+                            TipoDeCombustivel = 0,
+                            TipoDeVeiculo = 0,
+                            ValorHora = 45.950000000000003
+                        });
+                });
+
+            modelBuilder.Entity("api.Models.Entities.CheckList", b =>
+                {
+                    b.HasOne("api.Models.Entities.LocacaoVeiculo", "LocacaoVeiculo")
+                        .WithMany()
+                        .HasForeignKey("LocacaoVeiculoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("api.Models.Entities.Operador", "Operador")
+                        .WithMany()
+                        .HasForeignKey("OperadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LocacaoVeiculo");
+
+                    b.Navigation("Operador");
                 });
 
             modelBuilder.Entity("api.Models.Entities.Cliente", b =>
                 {
                     b.HasOne("api.Models.Entities.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("EnderecoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EnderecoId");
 
                     b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("api.Models.Entities.LocacaoVeiculo", b =>
                 {
-                    b.HasOne("api.Models.Entities.CheckList", "CheckList")
-                        .WithMany()
-                        .HasForeignKey("CheckListId");
-
                     b.HasOne("api.Models.Entities.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")
@@ -305,8 +412,6 @@ namespace api.Migrations
                         .HasForeignKey("VeiculoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CheckList");
 
                     b.Navigation("Cliente");
 
@@ -328,9 +433,7 @@ namespace api.Migrations
                 {
                     b.HasOne("api.Models.Entities.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("EnderecoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EnderecoId");
 
                     b.Navigation("Endereco");
                 });

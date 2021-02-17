@@ -1,7 +1,7 @@
 ﻿using api.Domain.ViewModels;
-using api.Models.Entities;
-using Application.Interfaces;
-using Domain.Interfaces;
+using api.Domain.Models;
+using api.Application.Interfaces;
+using api.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

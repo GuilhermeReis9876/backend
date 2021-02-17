@@ -1,13 +1,13 @@
 using api.Domain.ViewModels;
-using Application.Interfaces;
+using api.Application.Interfaces;
 using CpfLibrary;
-using Domain.Interfaces;
+using api.Domain.Interfaces;
 using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace api.Application.Services
 {
     public class LoginService : ILoginService
     {

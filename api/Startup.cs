@@ -1,5 +1,5 @@
 using api.IoC;
-using Infrastructure.Data;
+using api.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

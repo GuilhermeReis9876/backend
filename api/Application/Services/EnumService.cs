@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Application.Interfaces;
-using Domain.ViewModels;
+using api.Application.Interfaces;
+using api.Domain.ViewModels;
 
-namespace Application.Services
+namespace api.Application.Services
 {
     public class EnumService : IEnumService
     {

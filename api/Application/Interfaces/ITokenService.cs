@@ -1,4 +1,4 @@
-namespace Application.Interfaces
+namespace api.Application.Interfaces
 {
     public interface ITokenService
     {

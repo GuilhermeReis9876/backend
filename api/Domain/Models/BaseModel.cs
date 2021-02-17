@@ -1,7 +1,6 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace api.Models.Entities
+namespace api.Domain.Models
 {
     public class BaseModel
     {
