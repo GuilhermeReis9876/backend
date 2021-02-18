@@ -33,14 +33,14 @@ namespace api.Application.Services
             {
                 return _mapper.Map<UserInfoViewModel>
                     (
-                        await _clienteRepository.GetUserByRegister(userRegister)
+                        await _clienteRepository.UserExists(userRegister)
                     );
             }
             else
             {
                 return _mapper.Map<UserInfoViewModel>
                     (
-                        await _operadorRepository.GetUserByRegister(userRegister)
+                        await _operadorRepository.UserExists(userRegister)
                     );
             }
             

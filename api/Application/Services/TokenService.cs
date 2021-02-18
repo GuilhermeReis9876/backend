@@ -63,29 +63,5 @@ namespace api.Application.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public async Task<object> GetUserByToken(string token)
-        {
-            var tokenValue = token.Substring(7);
-            var tokenJwt = new JwtSecurityToken(jwtEncodedString: tokenValue);
-            var userRegister = tokenJwt.Claims.Where(c => c.Type == "nameid").FirstOrDefault().Value;
-            userRegister = userRegister.Replace(".", "").Replace("-", "");
-            if (Cpf.Check(userRegister))
-            {
-                return _mapper.Map<UserInfoViewModel>
-                    (
-                        await _clienteRepository.GetUserByRegister(userRegister)
-                    );
-            }
-            else
-            {
-                return _mapper.Map<UserInfoViewModel>
-                    (
-                        await _operadorRepository.GetUserByRegister(userRegister)
-                    );
-            }
-
-
-        }
-
     }
 }

@@ -28,10 +28,5 @@ namespace api.Infrastructure.Repositories
             return await _clientes.SingleOrDefaultAsync(x => x.Cpf == register);
         }
 
-        public async Task<Cliente> GetUserByRegister(string register)
-        {
-            return await _clientes.SingleOrDefaultAsync(x => x.Cpf == register);
-        }
-
     }
 }

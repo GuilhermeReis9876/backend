@@ -7,7 +7,5 @@ namespace api.Domain.Interfaces
     {
         Task<Operador> UserExists(string register);
 
-        Task<Operador> GetUserByRegister(string register);
-
     }
 }
