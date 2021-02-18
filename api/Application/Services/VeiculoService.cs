@@ -46,5 +46,19 @@ namespace api.Application.Services
             }
         }
 
+        public async Task<IEnumerable<Veiculo>> GetVeiculoByCategoria(EnumTipoDeVeiculo id)
+        {
+            try
+            {
+                var result = await _VeiculoRepository.GetVeiculosByCategoria(id);
+                if (result == null) return null;
+                return result;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
     }
 }

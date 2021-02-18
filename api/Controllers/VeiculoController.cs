@@ -88,5 +88,30 @@ namespace api.Controllers
         {
             return _enumService.GetValues<EnumTipoDeCombustivel>();
         }
+
+        [Route("Categoria/{id}")]
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<VeiculoViewModel>>> GetVeiculoByCategoria(EnumTipoDeVeiculo id)
+        {
+            try
+            {
+                var veiculos = await _veiculoService.GetVeiculoByCategoria(id);
+                var veiculosVM = new List<VeiculoViewModel>();
+
+                foreach (var veiculo in veiculos)
+                {
+                    veiculosVM.Add(_mapper.Map<VeiculoViewModel>(veiculo));
+                }
+
+                if(veiculosVM == null || veiculosVM.Count == 0) throw new Exception("Não foram encontrados veículos desta categoria");
+
+                return veiculosVM;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, ex.Message);
+            }
+        }
     }
 }

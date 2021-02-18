@@ -9,5 +9,7 @@ namespace api.Application.Interfaces
         Task<IEnumerable<Veiculo>> GetVeiculos();
 
         Task<Veiculo> GetVeiculoById(int id);
+
+        Task<IEnumerable<Veiculo>> GetVeiculoByCategoria(EnumTipoDeVeiculo id);
     }
 }

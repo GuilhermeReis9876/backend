@@ -38,5 +38,11 @@ namespace api.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Veiculo>> GetVeiculosByCategoria(EnumTipoDeVeiculo id)
+        {
+            return await _context.Veiculos
+                .Where(m => m.TipoDeVeiculo == id)
+                .ToListAsync();               
+        }
     }
 }
