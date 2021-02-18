@@ -26,6 +26,7 @@ namespace api.Application.Services
         {
             login = login.Replace(".", "").Replace("-", "");
 
+            try{
             var cliente = await _clienteRepository.UserExists(login);
             if (cliente == null)
             {
@@ -69,6 +70,11 @@ namespace api.Application.Services
                     Token = $"Bearer {_tokenService.CreateToken(cliente, cliente.TipoDeUsuario, cliente.Cpf)}"
                 };
 
+            }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
 
 

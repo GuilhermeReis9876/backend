@@ -41,7 +41,14 @@ namespace api.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<LoginViewModel>> Login(string login, string senha)
         {
-            return await _loginService.ValidateUser(login, senha);
+            try
+            {
+                return await _loginService.ValidateUser(login, senha);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("create")]
