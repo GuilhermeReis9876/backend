@@ -1,13 +1,13 @@
+using api.Application.Interfaces;
+using api.Domain.Models;
+using api.Domain.ViewModels;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using api.Application.Interfaces;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using api.Domain.ViewModels;
-using api.Domain.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace api.Controllers
 {

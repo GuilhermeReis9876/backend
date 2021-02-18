@@ -1,6 +1,6 @@
-using api.Domain.Models;
 using api.Application.Interfaces;
 using api.Domain.Interfaces;
+using api.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

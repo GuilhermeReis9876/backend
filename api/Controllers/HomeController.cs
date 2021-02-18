@@ -10,11 +10,11 @@ namespace api.Controllers
 
 
         public HomeController(
-            ILogger<HomeController> logger, 
+            ILogger<HomeController> logger,
             IMapper mapper
             ) :
             base(logger, mapper)
-        {        }
+        { }
 
         [HttpGet]
         [Route("/")]

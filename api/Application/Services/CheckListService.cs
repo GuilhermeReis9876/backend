@@ -1,6 +1,6 @@
-using api.Domain.Models;
 using api.Application.Interfaces;
 using api.Domain.Interfaces;
+using api.Domain.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -29,12 +29,12 @@ namespace api.Application.Services
 
                 var locacaoValor = locacao.ValorLocacao;
 
-                foreach(var aux in clAux)
+                foreach (var aux in clAux)
                 {
-                    if(aux.CheckListInicial == false) throw new Exception("O retorno do veículo já foi efetuado");
-                    
-                    if(aux.EstaComTanqueCheio != cl.EstaComTanqueCheio) locacaoValor += locacao.ValorLocacao * 0.3;
-                    if(aux.EstaLimpo != cl.EstaLimpo) locacaoValor += locacao.ValorLocacao * 0.3;
+                    if (aux.CheckListInicial == false) throw new Exception("O retorno do veículo já foi efetuado");
+
+                    if (aux.EstaComTanqueCheio != cl.EstaComTanqueCheio) locacaoValor += locacao.ValorLocacao * 0.3;
+                    if (aux.EstaLimpo != cl.EstaLimpo) locacaoValor += locacao.ValorLocacao * 0.3;
                     if (aux.EstaSemAmassados != cl.EstaSemAmassados) locacaoValor += locacao.ValorLocacao * 0.3;
                     if (aux.EstaSemArranhoes != cl.EstaSemArranhoes) locacaoValor += locacao.ValorLocacao * 0.3;
                 }
@@ -42,11 +42,11 @@ namespace api.Application.Services
                 cl.CheckListInicial = false;
                 await _checkListRepository.Save(cl);
 
-                locacao.ValorLocacao = locacaoValor;            
+                locacao.ValorLocacao = locacaoValor;
                 locacao.Status = EnumStatusLocacao.Finalizado;
                 await _locacaoRepository.Update(locacao);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -67,7 +67,7 @@ namespace api.Application.Services
                 locacao.Status = EnumStatusLocacao.Locado;
                 await _locacaoRepository.Update(locacao);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

@@ -1,7 +1,7 @@
-﻿using api.Domain.Models;
-using api.Application.Interfaces;
-using AutoMapper;
+﻿using api.Application.Interfaces;
+using api.Domain.Models;
 using api.Domain.ViewModels;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,7 +20,7 @@ namespace api.Controllers
             IMapper mapper
 
         ) :
-            base(logger,mapper)
+            base(logger, mapper)
         {
             _checkListService = checkListService;
         }
@@ -60,6 +60,6 @@ namespace api.Controllers
             await _checkListService.RegistrarRetorno(checkList);
             return StatusCode(200, "O CheckList de retorno do veículo foi efetuado com sucesso!");
         }
-        
+
     }
 }

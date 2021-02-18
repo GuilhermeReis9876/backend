@@ -4,6 +4,6 @@ namespace api.Domain.Models
     {
         Pendente,
         Locado,
-        Finalizado        
+        Finalizado
     }
 }

@@ -1,7 +1,7 @@
-using api.Application.Services;
-using api.Infrastructure.DtoHandler;
 using api.Application.Interfaces;
+using api.Application.Services;
 using api.Domain.Interfaces;
+using api.Infrastructure.DtoHandler;
 using api.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 

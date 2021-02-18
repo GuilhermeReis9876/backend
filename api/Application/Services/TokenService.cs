@@ -69,7 +69,7 @@ namespace api.Application.Services
             var tokenJwt = new JwtSecurityToken(jwtEncodedString: tokenValue);
             var userRegister = tokenJwt.Claims.Where(c => c.Type == "nameid").FirstOrDefault().Value;
             userRegister = userRegister.Replace(".", "").Replace("-", "");
-            if(Cpf.Check(userRegister))
+            if (Cpf.Check(userRegister))
             {
                 return _mapper.Map<UserInfoViewModel>
                     (
@@ -83,8 +83,8 @@ namespace api.Application.Services
                         await _operadorRepository.GetUserByRegister(userRegister)
                     );
             }
-            
-            
+
+
         }
 
     }

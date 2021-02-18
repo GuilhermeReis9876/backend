@@ -1,6 +1,6 @@
-﻿using System;
+﻿using api.Domain.Models;
+using System;
 using System.Collections.Generic;
-using api.Domain.Models;
 
 namespace api.Domain.ViewModels
 {
@@ -22,7 +22,7 @@ namespace api.Domain.ViewModels
 
         public string Error { get; set; }
 
-        public EnumStatusLocacao? Status {get ; set; }
+        public EnumStatusLocacao? Status { get; set; }
 
     }
 }

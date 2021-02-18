@@ -1,5 +1,5 @@
-using api.Domain.Models;
 using api.Domain.Interfaces;
+using api.Domain.Models;
 using api.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;

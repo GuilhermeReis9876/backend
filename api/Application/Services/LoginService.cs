@@ -1,7 +1,7 @@
-using api.Domain.ViewModels;
 using api.Application.Interfaces;
-using CpfLibrary;
 using api.Domain.Interfaces;
+using api.Domain.ViewModels;
+using CpfLibrary;
 using System;
 using System.Security.Cryptography;
 using System.Text;
