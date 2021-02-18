@@ -7,7 +7,6 @@ namespace api.Domain.ViewModels
         public bool EstaSemAmassados { get; set; }
         public bool EstaSemArranhoes { get; set; }
         public int LocacaoVeiculoId { get; set; }
-        public int OperadorId { get; set; }
 
     }
 }

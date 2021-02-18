@@ -1,6 +1,7 @@
 ﻿using api.Application.Interfaces;
 using api.Domain.ViewModels;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,12 +28,13 @@ namespace api.Controllers
 
         [Route("Agendar")]
         [HttpPost]
-        //[Authorize]
+        [Authorize(Roles = "OPERADOR, CLIENTE")]
         public async Task<LocacaoVeiculoViewModel> Agendar(LocacaoVeiculoViewModel locacaoVeiculoVM)
         {
             try
             {
-                await _locacaoVeiculoService.Agendar(locacaoVeiculoVM);
+                string token = HttpContext.Request.Headers["Authorization"];
+                await _locacaoVeiculoService.Agendar(locacaoVeiculoVM, token);
             }
             catch (Exception ex)
             {
@@ -45,7 +47,7 @@ namespace api.Controllers
 
         [Route("Simular")]
         [HttpPost]
-        //[Authorize]
+        [AllowAnonymous]
         public async Task<SimulacaoViewModel> Simular(SimulacaoViewModel simulacaoVM)
         {
             try

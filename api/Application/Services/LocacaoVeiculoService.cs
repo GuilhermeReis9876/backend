@@ -18,24 +18,29 @@ namespace api.Application.Services
         private readonly IClienteRepository _clienteRepository;
         private readonly ILocacaoVeiculoRepository _locacaoVeiculoRepository;
         private readonly IMapper _mapper;
+        private readonly IUtilService _utilService;
 
         public LocacaoVeiculoService(IVeiculoRepository veiculoRepository,
             IClienteRepository clienteRepository,
             ILocacaoVeiculoRepository locacaoVeiculoRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IUtilService utilService)
         {
             _veiculoRepository = veiculoRepository;
             _clienteRepository = clienteRepository;
             _locacaoVeiculoRepository = locacaoVeiculoRepository;
             _mapper = mapper;
+            _utilService = utilService;
         }
 
 
-        public async Task<LocacaoVeiculoViewModel> Agendar(LocacaoVeiculoViewModel locacaoVeiculoVM)
+        public async Task<LocacaoVeiculoViewModel> Agendar(LocacaoVeiculoViewModel locacaoVeiculoVM, string token)
         {
-            var cliente = await _clienteRepository.GetById(locacaoVeiculoVM.ClienteId);
+            var clienteId = await _utilService.GetUserByToken(token);
 
-            if (cliente == null)
+            // var cliente = await _clienteRepository.GetById(locacaoVeiculoVM.ClienteId);
+
+            if (clienteId == null)
                 throw new Exception("Cliente não existe!");
 
             var veiculo = await _veiculoRepository.GetById(locacaoVeiculoVM.VeiculoId);
