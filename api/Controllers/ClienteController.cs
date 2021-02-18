@@ -34,6 +34,7 @@ namespace api.Controllers
 
         [Route("List")]
         [HttpGet]
+        [Authorize(Roles = "OPERADOR")]
         public async Task<IEnumerable<UsuarioResponseViewModel>> GetAll()
         {
             var clientes = await _clienteService.GetClientes();
@@ -49,7 +50,7 @@ namespace api.Controllers
 
         [Route("GetById/{id}")]
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "OPERADOR")]
         public async Task<UsuarioResponseViewModel> GetById(int id)
         {
             try
@@ -64,7 +65,7 @@ namespace api.Controllers
 
         [Route("Update/{id}")]
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "OPERADOR, CLIENTE")]
         public async Task<IActionResult> Update(int id, [FromBody] UsuarioUpdateViewModel clienteVM)
         {
             try
@@ -89,7 +90,7 @@ namespace api.Controllers
 
         [Route("Delete/{id}")]
         [HttpDelete]
-        [Authorize]
+        [Authorize(Roles = "OPERADOR")]
         public async Task<IActionResult> Delete(int id)
         {
             try

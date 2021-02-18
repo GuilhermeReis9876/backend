@@ -1,11 +1,10 @@
-using System.Threading.Tasks;
+using api.Domain.Models;
 
 namespace api.Application.Interfaces
 {
     public interface ITokenService
     {
-        string CreateToken(object user);
+        string CreateToken(object user, EnumTipoDeUsuario tipoDeUsuario);
 
-        Task<object> GetUserByToken(string token);
     }
 }

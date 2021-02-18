@@ -1,5 +1,6 @@
 using api.Application.Interfaces;
 using api.Domain.Interfaces;
+using api.Domain.Models;
 using api.Domain.ViewModels;
 using AutoMapper;
 using CpfLibrary;
@@ -31,14 +32,15 @@ namespace api.Application.Services
             _mapper = mapper;
         }
 
-        public string CreateToken(object usuario)
+        public string CreateToken(object usuario, EnumTipoDeUsuario tipoDeUsuario)
         {
             var propertyNome = usuario.GetType().GetProperty("Nome");
             var Nome = (string)propertyNome.GetValue(usuario);
 
             var claims =
                 new List<Claim> {
-                    new Claim(JwtRegisteredClaimNames.NameId, Nome)
+                    new Claim(JwtRegisteredClaimNames.NameId, Nome),
+                    new Claim(ClaimTypes.Role, tipoDeUsuario.ToString())
                 };
 
             // Creating Credentials
@@ -61,30 +63,6 @@ namespace api.Application.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
-        }
-
-        public async Task<object> GetUserByToken(string token)
-        {
-            var tokenValue = token.Substring(7);
-            var tokenJwt = new JwtSecurityToken(jwtEncodedString: tokenValue);
-            var userRegister = tokenJwt.Claims.Where(c => c.Type == "nameid").FirstOrDefault().Value;
-            userRegister = userRegister.Replace(".", "").Replace("-", "");
-            if(Cpf.Check(userRegister))
-            {
-                return _mapper.Map<UserInfoViewModel>
-                    (
-                        await _clienteRepository.GetUserByRegister(userRegister)
-                    );
-            }
-            else
-            {
-                return _mapper.Map<UserInfoViewModel>
-                    (
-                        await _operadorRepository.GetUserByRegister(userRegister)
-                    );
-            }
-            
-            
         }
 
     }

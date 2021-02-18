@@ -4,6 +4,7 @@ using api.Application.Interfaces;
 using api.Domain.Interfaces;
 using api.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
 
 namespace api.IoC
 {
@@ -22,6 +23,7 @@ namespace api.IoC
             services.AddScoped<ILocacaoVeiculoService, LocacaoVeiculoService>();
             services.AddScoped<IEnumService, EnumService>();
             services.AddScoped<ICheckListService, CheckListService>();
+            services.AddScoped<IUtilService, UtilService>();
 
 
             //Infrastructure Layer

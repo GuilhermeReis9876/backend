@@ -3,6 +3,7 @@ using api.Application.Interfaces;
 using api.Domain.Interfaces;
 using System;
 using System.Threading.Tasks;
+using api.Domain.ViewModels;
 
 namespace api.Application.Services
 {
@@ -10,14 +11,16 @@ namespace api.Application.Services
     {
         private readonly ICheckListRepository _checkListRepository;
         private readonly ILocacaoVeiculoRepository _locacaoRepository;
+        private readonly IUtilService _utilService;
 
-        public CheckListService(ICheckListRepository checkListRepository, ILocacaoVeiculoRepository locacaoRepository)
+        public CheckListService(ICheckListRepository checkListRepository, ILocacaoVeiculoRepository locacaoRepository, IUtilService utilService)
         {
             _checkListRepository = checkListRepository;
             _locacaoRepository = locacaoRepository;
+            _utilService = utilService;
         }
 
-        public async Task RegistrarRetorno(CheckList cl)
+        public async Task RegistrarRetorno(CheckList cl, string token)
         {
             var locacao = await _locacaoRepository.GetById(cl.LocacaoVeiculoId);
             if (locacao == null) throw new Exception("A locação do veículo não foi localizada no sistema");
@@ -40,6 +43,9 @@ namespace api.Application.Services
                 }
 
                 cl.CheckListInicial = false;
+                var operadorId = await _utilService.GetUserByToken(token);
+                cl.OperadorId = operadorId.Id;                
+                
                 await _checkListRepository.Save(cl);
 
                 locacao.ValorLocacao = locacaoValor;            
@@ -52,7 +58,7 @@ namespace api.Application.Services
             }
         }
 
-        public async Task RegistrarLiberacao(CheckList cl)
+        public async Task RegistrarLiberacao(CheckList cl, string token)
         {
             var locacao = await _locacaoRepository.GetById(cl.LocacaoVeiculoId);
             if (locacao == null) throw new Exception("A locação do veículo não foi localizada no sistema");
@@ -61,7 +67,11 @@ namespace api.Application.Services
             {
                 var clAux = await _checkListRepository.GetCheckListByLocacaoId(cl.LocacaoVeiculoId);
                 if (clAux.Count > 0) throw new Exception("A liberação do veículo já foi efetuada");
+                
                 cl.CheckListInicial = true;
+                var operadorId = await _utilService.GetUserByToken(token);
+                cl.OperadorId = operadorId.Id;
+                
                 await _checkListRepository.Save(cl);
 
                 locacao.Status = EnumStatusLocacao.Locado;

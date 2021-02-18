@@ -34,7 +34,7 @@ namespace api.Controllers
 
         [Route("List")]
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<IEnumerable<VeiculoViewModel>> GetAll()
         {
             try
@@ -57,7 +57,7 @@ namespace api.Controllers
 
         [Route("GetById/{id}")]
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<VeiculoViewModel> GetById(int id)
         {
             try
@@ -75,7 +75,7 @@ namespace api.Controllers
 
         [Route("Categorias")]
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         public List<EnumViewModel> GetCategorias()
         {
             return _enumService.GetValues<EnumTipoDeVeiculo>();
@@ -83,7 +83,7 @@ namespace api.Controllers
 
         [Route("Combustiveis")]
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         public List<EnumViewModel> GetCombustiveis()
         {
             return _enumService.GetValues<EnumTipoDeCombustivel>();
