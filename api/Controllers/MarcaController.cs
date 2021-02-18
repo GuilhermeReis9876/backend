@@ -30,7 +30,7 @@ namespace api.Controllers
 
         [Route("List")]
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<IEnumerable<MarcaViewModel>> GetAll()
         {
             try
@@ -53,7 +53,7 @@ namespace api.Controllers
 
         [Route("GetById/{id}")]
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<MarcaViewModel> GetById(int id)
         {
             try

@@ -31,7 +31,7 @@ namespace api.Application.Services
             {
                 var operador = await _operadorRepository.UserExists(login);
                 if (operador == null)
-                    throw new Exception("Usu�rio n�o existe!");
+                    throw new Exception("O usuário ou senha está inválido");
                 else
                 {
                     var hmac = new HMACSHA512(operador.PasswordSalt);
@@ -40,13 +40,13 @@ namespace api.Application.Services
 
                     for (int i = 0; i < computedHash.Length; i++)
                     {
-                        if (computedHash[i] != operador.PasswordHash[i]) throw new NotImplementedException();
+                        if (computedHash[i] != operador.PasswordHash[i]) throw new Exception("O usuário ou senha está inválido");
                     }
 
                     return new LoginViewModel
                     {
                         Usuario = login,
-                        Token = $"Bearer {_tokenService.CreateToken(operador)}"
+                        Token = $"Bearer {_tokenService.CreateToken(operador, operador.TipoDeUsuario)}"
                     };
 
 
@@ -60,13 +60,13 @@ namespace api.Application.Services
 
                 for (int i = 0; i < computedHash.Length; i++)
                 {
-                    if (computedHash[i] != cliente.PasswordHash[i]) throw new NotImplementedException();
+                    if (computedHash[i] != cliente.PasswordHash[i]) throw new Exception("O usuário ou senha está inválido");
                 }
 
                 return new LoginViewModel
                 {
                     Usuario = login,
-                    Token = $"Bearer {_tokenService.CreateToken(cliente)}"
+                    Token = $"Bearer {_tokenService.CreateToken(cliente, cliente.TipoDeUsuario)}"
                 };
 
             }

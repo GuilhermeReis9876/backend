@@ -26,9 +26,10 @@ namespace api.Controllers
         }
 
         [HttpPost("checkLiberacao")]
-        [Authorize]
+        [Authorize(Roles = "OPERADOR")]
         public async Task<ActionResult> RegistrarLiberacao([FromBody] CheckListViewModel cl)
         {
+            string token = HttpContext.Request.Headers["Authorization"];
             // var checkList = _mapper.Map<CheckList>(cl);
             var checkList = new CheckList()
             {
@@ -36,17 +37,17 @@ namespace api.Controllers
                 EstaComTanqueCheio = cl.EstaComTanqueCheio,
                 EstaSemAmassados = cl.EstaSemAmassados,
                 EstaSemArranhoes = cl.EstaSemArranhoes,
-                LocacaoVeiculoId = cl.LocacaoVeiculoId,
-                OperadorId = cl.OperadorId
+                LocacaoVeiculoId = cl.LocacaoVeiculoId
             };
-            await _checkListService.RegistrarLiberacao(checkList);
+            await _checkListService.RegistrarLiberacao(checkList, token);
             return StatusCode(200, "O CheckList de liberação do veículo foi efetuado com sucesso!");
         }
 
         [HttpPost("checkRetorno")]
-        [Authorize]
+        [Authorize(Roles = "OPERADOR")]
         public async Task<ActionResult> RegistraRetorno([FromBody] CheckListViewModel cl)
         {
+            string token = HttpContext.Request.Headers["Authorization"];
             // var checkList = _mapper.Map<CheckList>(cl);
             var checkList = new CheckList()
             {
@@ -54,10 +55,9 @@ namespace api.Controllers
                 EstaComTanqueCheio = cl.EstaComTanqueCheio,
                 EstaSemAmassados = cl.EstaSemAmassados,
                 EstaSemArranhoes = cl.EstaSemArranhoes,
-                LocacaoVeiculoId = cl.LocacaoVeiculoId,
-                OperadorId = cl.OperadorId
+                LocacaoVeiculoId = cl.LocacaoVeiculoId
             };
-            await _checkListService.RegistrarRetorno(checkList);
+            await _checkListService.RegistrarRetorno(checkList, token);
             return StatusCode(200, "O CheckList de retorno do veículo foi efetuado com sucesso!");
         }
 

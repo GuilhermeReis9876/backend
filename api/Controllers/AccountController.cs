@@ -38,14 +38,14 @@ namespace api.Controllers
         }
 
         [HttpPost("login")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<ActionResult<LoginViewModel>> Login(string login, string senha)
         {
             return await _loginService.ValidateUser(login, senha);
         }
 
         [HttpPost("create")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<IActionResult> Create(UsuarioViewModel usuarioVM)
         {
             if (string.IsNullOrEmpty(usuarioVM.Nome))
@@ -95,16 +95,6 @@ namespace api.Controllers
 
             return BadRequest("N�o foi poss�vel efetuar o cadastrar");
         }
-
-        // TESTANDO API
-        [HttpGet]
-        [Authorize]
-        public async Task<object> GetUserId()
-        {
-            var tokenHeader = (string)HttpContext.Request.Headers["Authorization"];
-            return await _tokenService.GetUserByToken(tokenHeader);
-        }
-
     }
 
 }
