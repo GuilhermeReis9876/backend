@@ -29,7 +29,7 @@ namespace api.Controllers
         [Route("Agendar")]
         [HttpPost]
         [Authorize(Roles = "OPERADOR, CLIENTE")]
-        public async Task<LocacaoVeiculoViewModel> Agendar(LocacaoVeiculoViewModel locacaoVeiculoVM)
+        public async Task<LocacaoVeiculoViewModel> Agendar([FromBody] LocacaoVeiculoViewModel locacaoVeiculoVM)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace api.Controllers
         [Route("Simular")]
         [HttpPost]
         [AllowAnonymous]
-        public async Task<SimulacaoViewModel> Simular(SimulacaoViewModel simulacaoVM)
+        public async Task<SimulacaoViewModel> Simular([FromBody] SimulacaoViewModel simulacaoVM)
         {
             try
             {

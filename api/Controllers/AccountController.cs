@@ -39,7 +39,7 @@ namespace api.Controllers
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<LoginViewModel>> Login(string login, string senha)
+        public async Task<ActionResult<LoginViewModel>> Login([FromBody] string login, string senha)
         {
             try
             {
@@ -53,10 +53,10 @@ namespace api.Controllers
 
         [HttpPost("create")]
         [AllowAnonymous]
-        public async Task<IActionResult> Create(UsuarioViewModel usuarioVM)
+        public async Task<IActionResult> Create([FromBody] UsuarioViewModel usuarioVM)
         {
             if (string.IsNullOrEmpty(usuarioVM.Nome))
-                return BadRequest("Nome � requerido para cadastro!");
+                return BadRequest("Nome é requerido para cadastro!");
 
             if (usuarioVM.TipoUsuario == EnumTipoDeUsuario.CLIENTE)
             {
@@ -100,7 +100,7 @@ namespace api.Controllers
                 }
             }
 
-            return BadRequest("N�o foi poss�vel efetuar o cadastrar");
+            return BadRequest("Não foi possível efetuar o cadastrar");
         }
     }
 
