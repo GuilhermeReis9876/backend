@@ -32,14 +32,12 @@ namespace api.Application.Services
             _mapper = mapper;
         }
 
-        public string CreateToken(object usuario, EnumTipoDeUsuario tipoDeUsuario)
+        public string CreateToken(object usuario, EnumTipoDeUsuario tipoDeUsuario, string register)
         {
-            var propertyNome = usuario.GetType().GetProperty("Nome");
-            var Nome = (string)propertyNome.GetValue(usuario);
 
             var claims =
                 new List<Claim> {
-                    new Claim(JwtRegisteredClaimNames.NameId, Nome),
+                    new Claim(JwtRegisteredClaimNames.NameId, register),
                     new Claim(ClaimTypes.Role, tipoDeUsuario.ToString())
                 };
 

@@ -46,7 +46,7 @@ namespace api.Application.Services
                     return new LoginViewModel
                     {
                         Usuario = login,
-                        Token = $"Bearer {_tokenService.CreateToken(operador, operador.TipoDeUsuario)}"
+                        Token = $"Bearer {_tokenService.CreateToken(operador, operador.TipoDeUsuario, operador.Matricula)}"
                     };
 
 
@@ -66,7 +66,7 @@ namespace api.Application.Services
                 return new LoginViewModel
                 {
                     Usuario = login,
-                    Token = $"Bearer {_tokenService.CreateToken(cliente, cliente.TipoDeUsuario)}"
+                    Token = $"Bearer {_tokenService.CreateToken(cliente, cliente.TipoDeUsuario, cliente.Cpf)}"
                 };
 
             }
