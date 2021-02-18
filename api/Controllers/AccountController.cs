@@ -1,6 +1,6 @@
-using api.Domain.ViewModels;
-using api.Domain.Models;
 using api.Application.Interfaces;
+using api.Domain.Models;
+using api.Domain.ViewModels;
 using AutoMapper;
 using CpfLibrary;
 using Microsoft.AspNetCore.Authorization;
@@ -54,7 +54,7 @@ namespace api.Controllers
             if (usuarioVM.TipoUsuario == EnumTipoDeUsuario.CLIENTE)
             {
                 usuarioVM.Cpf = usuarioVM.Cpf.Replace(".", "").Replace("-", "");
-                
+
                 if (Cpf.Check(usuarioVM.Cpf))
                 {
                     if (await _loginService.UserExists(usuarioVM.Cpf))

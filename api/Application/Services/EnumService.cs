@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
 using api.Application.Interfaces;
 using api.Domain.ViewModels;
+using System;
+using System.Collections.Generic;
 
 namespace api.Application.Services
 {
@@ -10,13 +10,13 @@ namespace api.Application.Services
         public List<EnumViewModel> GetValues<T>()
         {
             List<EnumViewModel> values = new List<EnumViewModel>();
-            foreach (var itemType in Enum.GetValues(typeof (T)))
+            foreach (var itemType in Enum.GetValues(typeof(T)))
             {
                 values
                     .Add(new EnumViewModel()
                     {
-                        Id = (int) itemType,
-                        Value = Enum.GetName(typeof (T), itemType)
+                        Id = (int)itemType,
+                        Value = Enum.GetName(typeof(T), itemType)
                     });
             }
             return values;

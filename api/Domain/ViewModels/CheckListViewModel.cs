@@ -8,6 +8,6 @@ namespace api.Domain.ViewModels
         public bool EstaSemArranhoes { get; set; }
         public int LocacaoVeiculoId { get; set; }
         public int OperadorId { get; set; }
-        
+
     }
 }

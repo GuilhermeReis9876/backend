@@ -1,10 +1,11 @@
-﻿using api.Domain.ViewModels;
-using api.Application.Interfaces;
-using AutoMapper;
+﻿using api.Application.Interfaces;
 using api.Domain.Interfaces;
 using api.Domain.Models;
+using api.Domain.ViewModels;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -46,56 +47,29 @@ namespace api.Application.Services
 
             var locacoesDesteVeiculo = _locacaoVeiculoRepository.GetAll().Result.Where(x => x.VeiculoId == veiculo.Id).ToList();
 
-            var diasParaAlugar = (locacaoVeiculoVM.DataDevolucao - locacaoVeiculoVM.DataLocacao).Days;
+            locacaoVeiculoVM.LocacoesConflitantes = new HashSet<string>();
+
+            var diaLocacao = locacaoVeiculoVM.DataLocacao;
+            var diaDevolucao = locacaoVeiculoVM.DataDevolucao;
 
             locacaoVeiculoVM.LocacoesConflitantes = new HashSet<string>();
 
-            if (diasParaAlugar == 0)
+            double tempoExtraLiberacao = 3; // checkin + atraso do locatário anterior
+
+            var locacoesConflitantes = locacoesDesteVeiculo.Where(x => (diaLocacao <= x.DataDevolucao.AddHours(tempoExtraLiberacao)) && (diaDevolucao.AddHours(tempoExtraLiberacao) >= x.DataLocacao)).ToList();
+
+            if (locacoesConflitantes.Count > 0)
             {
-                var locacoesDoDia = locacoesDesteVeiculo.Where(x => locacaoVeiculoVM.DataLocacao == x.DataLocacao.Date || locacaoVeiculoVM.DataLocacao.Date == x.DataDevolucao.Date).ToList();
-                if(locacoesDoDia.Count == 0)
-                {
-                    locacaoVeiculoVM.TotalHoras = (int)(locacaoVeiculoVM.DataDevolucao - locacaoVeiculoVM.DataLocacao).TotalHours;
-                    locacaoVeiculoVM.ValorLocacao = veiculo.ValorHora * locacaoVeiculoVM.TotalHoras;
-                    locacaoVeiculoVM.Status = EnumStatusLocacao.Pendente;
-
-                    try
-                    {
-                        await _locacaoVeiculoRepository.Save(_mapper.Map<LocacaoVeiculo>(locacaoVeiculoVM));
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception(ex.Message);
-                    }
-                }
-                else
-                {
-                    foreach(var loc in locacoesDoDia)
-                    {
-                        locacaoVeiculoVM.LocacoesConflitantes.Add(loc.DataLocacao.ToString("dd/MM/yyyy") + "- até: " + loc.DataDevolucao.ToString("dd/MM/yyyy"));
-                    }
-                   
-                }
-
-                return locacaoVeiculoVM;
+                foreach (var loc in locacoesConflitantes)
+                    locacaoVeiculoVM.LocacoesConflitantes.Add(loc.DataLocacao.ToString("G", CultureInfo.InvariantCulture) + " até: " + loc.DataDevolucao.AddHours(tempoExtraLiberacao).ToString("G", CultureInfo.InvariantCulture));
             }
-                
 
-            var diaLocado = locacaoVeiculoVM.DataLocacao;
-
-            locacaoVeiculoVM.LocacoesConflitantes = new HashSet<string>();
-
-            for (var dias = 0; dias < diasParaAlugar; dias++)
-            {
-                var locacaoParaODia = locacoesDesteVeiculo.Where(x => diaLocado >= x.DataLocacao && diaLocado <= x.DataDevolucao).SingleOrDefault();
-                if (locacaoParaODia == null)
-                    diaLocado = diaLocado.AddDays(1);
-                else
-                    locacaoVeiculoVM.LocacoesConflitantes.Add(locacaoParaODia.DataLocacao.ToString("dd/MM/yyyy") + "- até: " + locacaoParaODia.DataDevolucao.ToString("dd/MM/yyyy"));
-            }
 
             if (locacaoVeiculoVM.LocacoesConflitantes.Count > 0)
+            {
+                locacaoVeiculoVM.Error = "Carro já locado para a data escolhida!";
                 return locacaoVeiculoVM;
+            }
 
 
             locacaoVeiculoVM.TotalHoras = (int)(locacaoVeiculoVM.DataDevolucao - locacaoVeiculoVM.DataLocacao).TotalHours;

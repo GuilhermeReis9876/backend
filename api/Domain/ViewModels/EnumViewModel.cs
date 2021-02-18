@@ -4,6 +4,6 @@ namespace api.Domain.ViewModels
     {
         public int Id { get; set; }
         public string Value { get; set; }
-        
+
     }
 }

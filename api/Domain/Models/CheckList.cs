@@ -24,7 +24,7 @@ namespace api.Domain.Models
         public Operador Operador { get; set; }
 
         public bool CheckListInicial { get; set; }
-        
-        
+
+
     }
 }

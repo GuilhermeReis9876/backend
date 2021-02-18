@@ -1,5 +1,5 @@
-using api.Domain.ViewModels;
 using api.Domain.Models;
+using api.Domain.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

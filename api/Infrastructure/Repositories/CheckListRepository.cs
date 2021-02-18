@@ -1,10 +1,10 @@
-using api.Domain.Models;
 using api.Domain.Interfaces;
+using api.Domain.Models;
 using api.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace api.Infrastructure.Repositories
 {
