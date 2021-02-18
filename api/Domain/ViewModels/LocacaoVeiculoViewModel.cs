@@ -18,6 +18,8 @@ namespace api.Domain.ViewModels
 
         public double ValorLocacao { get; set; }
 
+        public double ValorFinal { get; set; }
+
         public ICollection<string> LocacoesConflitantes { get; set; }/* = new HashSet<string>();*/
 
         public string Error { get; set; }

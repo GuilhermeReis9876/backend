@@ -22,6 +22,8 @@ namespace api.Domain.Models
         public DateTime DataDevolucao { get; set; }
 
         public double ValorLocacao { get; set; }
+        
+        public double ValorFinal { get; set; }
 
         public EnumStatusLocacao Status { get; set; }
     }

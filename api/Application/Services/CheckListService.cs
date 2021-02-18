@@ -48,7 +48,7 @@ namespace api.Application.Services
                 
                 await _checkListRepository.Save(cl);
 
-                locacao.ValorLocacao = locacaoValor;
+                locacao.ValorFinal = locacaoValor;
                 locacao.Status = EnumStatusLocacao.Finalizado;
                 await _locacaoRepository.Update(locacao);
             }
