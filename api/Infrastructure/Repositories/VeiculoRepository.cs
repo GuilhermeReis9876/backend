@@ -42,6 +42,8 @@ namespace api.Infrastructure.Repositories
         {
             return await _context.Veiculos
                 .Where(m => m.TipoDeVeiculo == id)
+                .Include(m => m.Modelo)
+                .Include(m => m.Modelo.Marca)
                 .ToListAsync();               
         }
     }
