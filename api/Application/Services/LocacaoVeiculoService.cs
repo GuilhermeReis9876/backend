@@ -76,7 +76,7 @@ namespace api.Application.Services
                 return locacaoVeiculoVM;
             }
 
-
+            locacaoVeiculoVM.ClienteId = clienteId.Id;
             locacaoVeiculoVM.TotalHoras = (int)(locacaoVeiculoVM.DataDevolucao - locacaoVeiculoVM.DataLocacao).TotalHours;
             locacaoVeiculoVM.ValorLocacao = veiculo.ValorHora * locacaoVeiculoVM.TotalHoras;
 
@@ -92,6 +92,47 @@ namespace api.Application.Services
 
             return locacaoVeiculoVM;
 
+        }
+
+        public async Task<IEnumerable<ReservaViewModel>> GetReservas()
+        {
+            try
+            {
+                var reservas = await _locacaoVeiculoRepository.GetReservas();
+                var reservasVM = new List<ReservaViewModel>();
+
+                foreach (var reserva in reservas)
+                {
+                    reservasVM.Add(_mapper.Map<ReservaViewModel>(reserva));
+                }
+
+                return reservasVM;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<IEnumerable<ReservaViewModel>> GetReservasByCliente(string token)
+        {
+            try
+            {
+                var clienteId = await _utilService.GetUserByToken(token);
+                var reservas = await _locacaoVeiculoRepository.GetReservasByCliente(clienteId.Id);
+                var reservasVM = new List<ReservaViewModel>();
+
+                foreach (var reserva in reservas)
+                {
+                    reservasVM.Add(_mapper.Map<ReservaViewModel>(reserva));
+                }
+
+                return reservasVM;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<SimulacaoViewModel> Simular(SimulacaoViewModel simulacaoVM)

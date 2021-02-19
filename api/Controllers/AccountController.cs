@@ -39,11 +39,11 @@ namespace api.Controllers
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<LoginViewModel>> Login([FromBody] string login, string senha)
+        public async Task<ActionResult<LoginViewModel>> Login([FromBody] LoginViewModel login)
         {
             try
             {
-                return await _loginService.ValidateUser(login, senha);
+                return await _loginService.ValidateUser(login.Usuario, login.Senha);
             }
             catch(Exception ex)
             {

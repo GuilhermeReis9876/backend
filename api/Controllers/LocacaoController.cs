@@ -74,5 +74,22 @@ namespace api.Controllers
         {
             return _enumService.GetValues<EnumStatusLocacao>();
         }
+
+        [Route("Reservas")]
+        [HttpGet]
+        [Authorize(Roles = "OPERADOR, CLIENTE")]
+        public async Task<IEnumerable<ReservaViewModel>> GetReservas()
+        {
+            return await _locacaoVeiculoService.GetReservas();
+        }
+
+        [Route("Reserva/Cliente")]
+        [HttpGet]
+        [Authorize(Roles = "OPERADOR, CLIENTE")]
+        public async Task<IEnumerable<ReservaViewModel>> GetReservasByCliente()
+        {
+            string token = HttpContext.Request.Headers["Authorization"];
+            return await _locacaoVeiculoService.GetReservasByCliente(token);
+        }
     }
 }
