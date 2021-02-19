@@ -2,6 +2,7 @@ using api.Application.Interfaces;
 using api.Domain.Interfaces;
 using api.Domain.Models;
 using api.Domain.ViewModels;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -14,10 +15,12 @@ namespace api.Application.Services
     public class ClienteService : IClienteService
     {
         private readonly IClienteRepository _clienteRepository;
+        private readonly IMapper _mapper;
 
-        public ClienteService(IClienteRepository clienteRepository)
+        public ClienteService(IClienteRepository clienteRepository, IMapper mapper)
         {
             _clienteRepository = clienteRepository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<Cliente>> GetClientes()
@@ -47,7 +50,9 @@ namespace api.Application.Services
                 Cpf = clienteVM.Cpf,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(clienteVM.Senha)),
                 PasswordSalt = hmac.Key,
-                TipoDeUsuario = clienteVM.TipoUsuario
+                TipoDeUsuario = clienteVM.TipoUsuario,
+                Endereco = _mapper.Map<Endereco>(clienteVM.Endereco)
+                
             };
 
             try

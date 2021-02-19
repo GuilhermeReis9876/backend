@@ -115,6 +115,12 @@ namespace api.Infrastructure.DtoHandler
                 .ForMember(dest => dest.Motor, opt => opt.MapFrom(src => src.Veiculo.Motor))
               .ForMember(dest => dest.Imagem, opt => opt.MapFrom(src => src.Veiculo.Imagem));
 
+            CreateMap<EnderecoViewModel, Endereco>();
+                
+
+
+
+
 
 
 

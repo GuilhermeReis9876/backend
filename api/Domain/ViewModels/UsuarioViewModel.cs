@@ -17,6 +17,8 @@ namespace api.Domain.ViewModels
 
         public string TipoUsuarioDescricao { get; set; }
 
+        public EnderecoViewModel Endereco { get; set; }
+
 
     }
 }
