@@ -4,6 +4,7 @@ namespace api.Domain.Models
     {
         GASOLINA,
         ALCOOL,
-        DIESEL
+        DIESEL,
+        FLEX
     }
 }

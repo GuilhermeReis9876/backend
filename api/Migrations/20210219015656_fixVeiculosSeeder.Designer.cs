@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Infrastructure.Data;
 
 namespace api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210219015656_fixVeiculosSeeder")]
+    partial class fixVeiculosSeeder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,7 +177,7 @@ namespace api.Migrations
                         {
                             Id = 1,
                             ClienteId = 1,
-                            DataDevolucao = new DateTime(2021, 2, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataDevolucao = new DateTime(2021, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataLocacao = new DateTime(2021, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 0,
                             TotalHoras = 48,

@@ -25,5 +25,8 @@ namespace api.Domain.Models
         public int Kilometragem { get; set; }
 
         public bool EstaLocado { get; set; }
+
+        public string Motor { get; set; }
+        public string Imagem { get; set; }
     }
 }
