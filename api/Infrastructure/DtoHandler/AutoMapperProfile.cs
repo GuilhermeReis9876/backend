@@ -43,13 +43,17 @@ namespace api.Infrastructure.DtoHandler
               .ForMember(dest => dest.ValorHora, opt => opt.MapFrom(src => src.ValorHora))
               .ForMember(dest => dest.LimitePortaMalas, opt => opt.MapFrom(src => src.LimitePortaMalas))
               .ForMember(dest => dest.TipoDeCombustivel, opt => opt.MapFrom(src => src.TipoDeCombustivel))
+              .ForMember(dest => dest.CombustivelDescricao, opt => opt.MapFrom(src => src.TipoDeCombustivel.ToString()))
               .ForMember(dest => dest.TipoDeVeiculo, opt => opt.MapFrom(src => src.TipoDeVeiculo))
+              .ForMember(dest => dest.TipoVeiculoDescricao, opt => opt.MapFrom(src => src.TipoDeVeiculo.ToString()))
               .ForMember(dest => dest.LimitePortaMalas, opt => opt.MapFrom(src => src.LimitePortaMalas))
               .ForMember(dest => dest.Kilometragem, opt => opt.MapFrom(src => src.Kilometragem))
               .ForMember(dest => dest.ModeloId, opt => opt.MapFrom(src => src.Modelo.Id))
               .ForMember(dest => dest.Modelo, opt => opt.MapFrom(src => src.Modelo.Name))
               .ForMember(dest => dest.MarcaId, opt => opt.MapFrom(src => src.Modelo.Marca.Id))
-              .ForMember(dest => dest.Marca, opt => opt.MapFrom(src => src.Modelo.Marca.Name));
+              .ForMember(dest => dest.Marca, opt => opt.MapFrom(src => src.Modelo.Marca.Name))
+              .ForMember(dest => dest.Motor, opt => opt.MapFrom(src => src.Motor))
+              .ForMember(dest => dest.Imagem, opt => opt.MapFrom(src => src.Imagem));
 
             CreateMap<Modelo, ModeloViewModel>()
               .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -63,7 +67,6 @@ namespace api.Infrastructure.DtoHandler
             CreateMap<LocacaoVeiculoViewModel, LocacaoVeiculo>()
                 .ForMember(dest => dest.ClienteId, opt => opt.MapFrom(src => src.ClienteId))
                 .ForMember(dest => dest.VeiculoId, opt => opt.MapFrom(src => src.VeiculoId))
-                .ForMember(dest => dest.ClienteId, opt => opt.MapFrom(src => src.ClienteId))
                 .ForMember(dest => dest.DataLocacao, opt => opt.MapFrom(src => src.DataLocacao))
                 .ForMember(dest => dest.DataDevolucao, opt => opt.MapFrom(src => src.DataDevolucao))
                 .ForMember(dest => dest.TotalHoras, opt => opt.MapFrom(src => src.TotalHoras));
@@ -92,6 +95,7 @@ namespace api.Infrastructure.DtoHandler
                 .ForMember(dest => dest.ValorLocacao, opt => opt.MapFrom(src => src.ValorLocacao))
                 .ForMember(dest => dest.ValorFinal, opt => opt.MapFrom(src => src.ValorFinal))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+                .ForMember(dest => dest.StatusDescricao, opt => opt.MapFrom(src => src.Status.ToString()))
                 .ForMember(dest => dest.TotalHoras, opt => opt.MapFrom(src => src.TotalHoras))
                 .ForMember(dest => dest.VeiculoId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Placa, opt => opt.MapFrom(src => src.Veiculo.Placa))
@@ -99,13 +103,17 @@ namespace api.Infrastructure.DtoHandler
                 .ForMember(dest => dest.ValorHora, opt => opt.MapFrom(src => src.Veiculo.ValorHora))
                 .ForMember(dest => dest.LimitePortaMalas, opt => opt.MapFrom(src => src.Veiculo.LimitePortaMalas))
                 .ForMember(dest => dest.TipoDeCombustivel, opt => opt.MapFrom(src => src.Veiculo.TipoDeCombustivel))
+                .ForMember(dest => dest.CombustivelDescricao, opt => opt.MapFrom(src => src.Veiculo.TipoDeCombustivel.ToString()))
                 .ForMember(dest => dest.TipoDeVeiculo, opt => opt.MapFrom(src => src.Veiculo.TipoDeVeiculo))
+                .ForMember(dest => dest.TipoVeiculoDescricao, opt => opt.MapFrom(src => src.Veiculo.TipoDeVeiculo.ToString()))
                 .ForMember(dest => dest.LimitePortaMalas, opt => opt.MapFrom(src => src.Veiculo.LimitePortaMalas))
                 .ForMember(dest => dest.Kilometragem, opt => opt.MapFrom(src => src.Veiculo.Kilometragem))
                 .ForMember(dest => dest.ModeloId, opt => opt.MapFrom(src => src.Veiculo.Modelo.Id))
                 .ForMember(dest => dest.Modelo, opt => opt.MapFrom(src => src.Veiculo.Modelo.Name))
                 .ForMember(dest => dest.MarcaId, opt => opt.MapFrom(src => src.Veiculo.Modelo.Marca.Id))
-                .ForMember(dest => dest.Marca, opt => opt.MapFrom(src => src.Veiculo.Modelo.Marca.Name));
+                .ForMember(dest => dest.Marca, opt => opt.MapFrom(src => src.Veiculo.Modelo.Marca.Name))
+                .ForMember(dest => dest.Motor, opt => opt.MapFrom(src => src.Veiculo.Motor))
+              .ForMember(dest => dest.Imagem, opt => opt.MapFrom(src => src.Veiculo.Imagem));
 
 
 
