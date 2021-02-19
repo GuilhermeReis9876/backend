@@ -24,7 +24,10 @@ namespace api.Infrastructure.Repositories
         {
             return await _context.LocacaoVeiculos
                 .Where(m => m.VeiculoId == m.VeiculoId)
+                .Where(m => m.Veiculo.ModeloId == m.Veiculo.ModeloId)
                 .Include(m => m.Veiculo)
+                .Include(m => m.Veiculo.Modelo)
+                .Include(m => m.Veiculo.Modelo.Marca)
                 .ToListAsync();
         }
 
@@ -34,6 +37,10 @@ namespace api.Infrastructure.Repositories
                 .Where(m => m.VeiculoId == m.VeiculoId)
                 .Where(m => m.ClienteId == id)
                 .Include(m => m.Veiculo)
+                .Where(m => m.Veiculo.ModeloId == m.Veiculo.ModeloId)
+                .Include(m => m.Veiculo.Modelo)
+                .Where(m => m.Veiculo.Modelo.MarcaId == m.Veiculo.Modelo.MarcaId)
+                .Include(m => m.Veiculo.Modelo.Marca)
                 .ToListAsync();
         }
     }

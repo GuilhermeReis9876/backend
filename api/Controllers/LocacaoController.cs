@@ -77,7 +77,7 @@ namespace api.Controllers
 
         [Route("Reservas")]
         [HttpGet]
-        [Authorize(Roles = "OPERADOR, CLIENTE")]
+        [Authorize(Roles = "OPERADOR")]
         public async Task<IEnumerable<ReservaViewModel>> GetReservas()
         {
             return await _locacaoVeiculoService.GetReservas();
@@ -85,7 +85,7 @@ namespace api.Controllers
 
         [Route("Reserva/Cliente")]
         [HttpGet]
-        [Authorize(Roles = "OPERADOR, CLIENTE")]
+        [Authorize(Roles = "CLIENTE")]
         public async Task<IEnumerable<ReservaViewModel>> GetReservasByCliente()
         {
             string token = HttpContext.Request.Headers["Authorization"];

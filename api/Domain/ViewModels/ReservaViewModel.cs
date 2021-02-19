@@ -38,8 +38,6 @@ namespace api.Domain.ViewModels
 
         public int Kilometragem { get; set; }
 
-        public bool EstaLocado { get; set; }
-
         public int MarcaId { get; set; }
 
         public string Marca { get; set; }
