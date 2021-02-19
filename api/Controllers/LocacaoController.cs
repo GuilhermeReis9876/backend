@@ -1,10 +1,12 @@
 ﻿using api.Application.Interfaces;
+using api.Domain.Models;
 using api.Domain.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace api.Controllers
@@ -14,15 +16,18 @@ namespace api.Controllers
         private readonly IMapper _mapper;
         private readonly ILocacaoVeiculoService _locacaoVeiculoService;
 
+        private IEnumService _enumService;
+
         public LocacaoController(
             ILogger<LocacaoController> logger,
             ILocacaoVeiculoService locacaoVeiculoService,
-            IMapper mapper
-
+            IMapper mapper,
+            IEnumService enumService
         ) :
             base(logger, mapper)
         {
             _locacaoVeiculoService = locacaoVeiculoService;
+            _enumService = enumService;
         }
 
 
@@ -60,6 +65,14 @@ namespace api.Controllers
             }
 
             return simulacaoVM;
+        }
+
+        [Route("Status")]
+        [HttpGet]
+        [AllowAnonymous]
+        public List<EnumViewModel> GetStatus()
+        {
+            return _enumService.GetValues<EnumStatusLocacao>();
         }
     }
 }
