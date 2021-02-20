@@ -9,12 +9,12 @@
 </ul>
 <h3>Estrutura do Projeto</h3>
 </hr>
-Utilizamos como referência uma abstração da arquitetura Clean, com o intuito de desacoplar a regra de negócio do sistema permitindo uma maior facilidade de manutenção.
+Utilizamos como referência uma abstração da arquitetura Clean, com o intuito de desacoplar a regra de negócio do sistema permitindo uma maior facilidade de manutenção. </li>
 <ul>
-  <li>Domain</li> Camada que contém nossas models/entidades, interface de repositório dessas models e a as ViewModels para Data Transfer Object.
-  <li>Application</li> Regras de negócios e suas interfaces.
-  <li>Infrastructure</li> Implementação do Entity Framework, DTO Handler e a implementação dos repositórios.
-  <li>Controller</li> Controllers, em suma. 
-  <li>IoC</li> Container para injeção de dependência das interfaces de serviço, infraestrutura (repositórios) e utilitários.
-  <li>Migration</li> Gerenciador de migrations do Entity Framework.
+  <li><b>Domain</b> - Camada que contém nossas models/entidades, interface de repositório dessas models e a as ViewModels para Data Transfer Object. </li> 
+  <li><b>Application</b> -  Regras de negócios e suas interfaces. </li> 
+  <li><b>Infrastructure</b> - Implementação do Entity Framework, DTO Handler e a implementação dos repositórios.</li> 
+  <li><b>Controller</b> - Controllers, em suma. </li> 
+  <li><b>IoC</b> - Container para injeção de dependência das interfaces de serviço, infraestrutura (repositórios) e utilitários.</li>
+  <li><b>Migration</b> - Gerenciador de migrations do Entity Framework. </li>
 </ul>
