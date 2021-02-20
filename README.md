@@ -5,6 +5,15 @@
   <li><a href="https://github.com/cassio-morais">Cássio Morais</a> ajudou no desenvolvimento, modelagem e implementação das regras de negócios do sistema, além de ser responsável por gerenciar e publicar a aplicação.</li> 
   <li><a href="https://github.com/vstorresti">Victor Torres</a> ajudou no desenvolvimento, modelagem e arquitetura do sistema, além de ser responsável por implementar configurações de segurança do sistema.</li>
 </ul>
+<h3>Tecnologias Utilizadas</h3>
+<ul>
+  <li>.NET</li>
+  <li>SQLServer</li>
+  <li>Entity Framework</li>
+  <li>JWT</li>
+  <li>AutoMapper</li>
+  <li>Clean Architecture</li>
+</ul>
 <h3>Estrutura do Projeto</h3>
 Utilizamos como referência uma abstração da arquitetura Clean, com o intuito de desacoplar a regra de negócio do sistema permitindo uma maior facilidade de manutenção.
 <ul>
