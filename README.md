@@ -11,9 +11,10 @@
 </hr>
 Utilizamos como referência uma abstração da arquitetura Clean, com o intuito de desacoplar a regra de negócio do sistema permitindo uma maior facilidade de manutenção.
 <ul>
-  <li>Domain</li>
-  <li>Application</li>
-  <li>Infrastructure</li>
-  <li>Controller</li>
-  
+  <li>Domain</li> - Camada que contém nossas models/entidades, interface de repositório dessas models e a as ViewModels para Data Transfer Object.
+  <li>Application</li> - Regras de negócios e suas interfaces.
+  <li>Infrastructure</li> - Implementação do Entity Framework, DTO Handler e a implementação dos repositórios.
+  <li>Controller</li> - Controllers, em suma. 
+  <li>IoC</li> - Container para injeção de dependência das interfaces de serviço, infraestrutura (repositórios) e utilitários.
+  <li>Migration</li> - Gerenciador de migrations do Entity Framework.
 </ul>
