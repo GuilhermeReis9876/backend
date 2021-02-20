@@ -17,19 +17,33 @@ Utilizamos como referência uma abstração da arquitetura Clean, com o intuito 
 </ul>
 
 📦api
- ┣ 📂Application
+
+ ┣ 📂Application 
+ 
  ┃ ┣ 📂Interfaces
+ 
  ┃ ┗ 📂Services
+ 
  ┣ 📂Controllers
+ 
  ┣ 📂Domain
+ 
  ┃ ┣ 📂Interfaces
+ 
  ┃ ┣ 📂Models
+ 
  ┃ ┗ 📂ViewModels
+ 
  ┣ 📂Infrastructure 
+ 
  ┃ ┣ 📂Data
+ 
  ┃ ┣ 📂DtoHandler
+ 
  ┃ ┗ 📂Repositories
+ 
  ┣ 📂IoC
+ 
  ┗ 📂Migrations
 
 <h3> Implementações de Segurança </h3>
