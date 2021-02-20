@@ -145,6 +145,8 @@ namespace api.Application.Services
             if (veiculo == null)
                 throw new Exception("Veículo não existe!");
 
+            if(simulacaoVM.Entrada > simulacaoVM.Saida)
+                throw new Exception("Data de locação não pode ser maior que a data de devolução!");
 
             simulacaoVM.TotalHoras = (int)(simulacaoVM.Saida - simulacaoVM.Entrada).TotalHours;
 
