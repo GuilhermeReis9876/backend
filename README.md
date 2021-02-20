@@ -15,36 +15,25 @@ Utilizamos como referência uma abstração da arquitetura Clean, com o intuito 
   <li><b>IoC</b> - Container para injeção de dependência das interfaces de serviço, infraestrutura (repositórios) e utilitários.</li>
   <li><b>Migration</b> - Gerenciador de migrations do Entity Framework. </li>
 </ul>
-
+<pre>
+<code>
 📦api
-
  ┣ 📂Application 
- 
  ┃ ┣ 📂Interfaces
- 
  ┃ ┗ 📂Services
- 
  ┣ 📂Controllers
- 
  ┣ 📂Domain
- 
  ┃ ┣ 📂Interfaces
- 
  ┃ ┣ 📂Models
- 
  ┃ ┗ 📂ViewModels
- 
  ┣ 📂Infrastructure 
- 
  ┃ ┣ 📂Data
- 
  ┃ ┣ 📂DtoHandler
- 
  ┃ ┗ 📂Repositories
- 
  ┣ 📂IoC
- 
  ┗ 📂Migrations
+ </code>
+ </pre>
 
 <h3> Implementações de Segurança </h3>
  <p>A api faz uso de Jason Web Token (JWT) para autenticação de endpoints durante o uso além da utilização do padrão de criptografia Hash Salting para utilizando de chave HMAC512 para garantir uma maior segurança a senha do usuário.</p>
