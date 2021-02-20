@@ -83,6 +83,14 @@ namespace api.Controllers
             return await _locacaoVeiculoService.GetReservas();
         }
 
+        [Route("Reservas/{id}")]
+        [HttpGet]
+        [Authorize(Roles = "OPERADOR")]
+        public async Task<ReservaViewModel> GetByReservaId(int id)
+        {
+            return await _locacaoVeiculoService.GetByReservaId(id);
+        }
+
         [Route("Reserva/Cliente")]
         [HttpGet]
         [Authorize(Roles = "CLIENTE")]

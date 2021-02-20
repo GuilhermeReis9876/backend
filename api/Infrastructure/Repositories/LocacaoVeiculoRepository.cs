@@ -42,5 +42,13 @@ namespace api.Infrastructure.Repositories
                 .Include(m => m.Veiculo.Modelo.Marca)
                 .ToListAsync();
         }
+
+        public async override Task<LocacaoVeiculo> GetById(int id)
+        {
+            return await _context.LocacaoVeiculos.Where(x => x.Id == id)
+               .Include(m => m.Veiculo)
+               .Include(m => m.Veiculo.Modelo)
+               .Include(m => m.Veiculo.Modelo.Marca).SingleOrDefaultAsync();
+        }
     }
 }

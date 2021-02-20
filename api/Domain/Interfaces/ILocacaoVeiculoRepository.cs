@@ -9,6 +9,6 @@ namespace api.Domain.Interfaces
         Task<IEnumerable<object>> GetReservas();
 
         Task<IEnumerable<object>> GetReservasByCliente(int id);
-        
+
     }
 }

@@ -36,11 +36,9 @@ namespace api.Application.Services
 
         public async Task<LocacaoVeiculoViewModel> Agendar(LocacaoVeiculoViewModel locacaoVeiculoVM, string token)
         {
-            var clienteId = await _utilService.GetUserByToken(token);
+            var cliente = await _utilService.GetUserByToken(token);
 
-            // var cliente = await _clienteRepository.GetById(locacaoVeiculoVM.ClienteId);
-
-            if (clienteId == null)
+            if (cliente == null)
                 throw new Exception("Cliente não existe!");
 
             var veiculo = await _veiculoRepository.GetById(locacaoVeiculoVM.VeiculoId);
@@ -76,7 +74,7 @@ namespace api.Application.Services
                 return locacaoVeiculoVM;
             }
 
-            locacaoVeiculoVM.ClienteId = clienteId.Id;
+            locacaoVeiculoVM.ClienteId = cliente.Id;
             locacaoVeiculoVM.TotalHoras = (int)(locacaoVeiculoVM.DataDevolucao - locacaoVeiculoVM.DataLocacao).TotalHours;
             locacaoVeiculoVM.ValorLocacao = veiculo.ValorHora * locacaoVeiculoVM.TotalHoras;
 
@@ -92,6 +90,11 @@ namespace api.Application.Services
 
             return locacaoVeiculoVM;
 
+        }
+
+        public async Task<ReservaViewModel> GetByReservaId(int id)
+        {
+            return _mapper.Map<ReservaViewModel>(await _locacaoVeiculoRepository.GetById(id));
         }
 
         public async Task<IEnumerable<ReservaViewModel>> GetReservas()

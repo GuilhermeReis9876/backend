@@ -89,6 +89,7 @@ namespace api.Infrastructure.DtoHandler
               .ForMember(dest => dest.TipoDeUsuario, opt => opt.MapFrom(src => src.TipoDeUsuario));
 
             CreateMap<LocacaoVeiculo, ReservaViewModel>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.ClienteId, opt => opt.MapFrom(src => src.ClienteId))
                 .ForMember(dest => dest.DataLocacao, opt => opt.MapFrom(src => src.DataLocacao))
                 .ForMember(dest => dest.DataDevolucao, opt => opt.MapFrom(src => src.DataDevolucao))
@@ -113,7 +114,7 @@ namespace api.Infrastructure.DtoHandler
                 .ForMember(dest => dest.MarcaId, opt => opt.MapFrom(src => src.Veiculo.Modelo.Marca.Id))
                 .ForMember(dest => dest.Marca, opt => opt.MapFrom(src => src.Veiculo.Modelo.Marca.Name))
                 .ForMember(dest => dest.Motor, opt => opt.MapFrom(src => src.Veiculo.Motor))
-              .ForMember(dest => dest.Imagem, opt => opt.MapFrom(src => src.Veiculo.Imagem));
+                .ForMember(dest => dest.Imagem, opt => opt.MapFrom(src => src.Veiculo.Imagem));
 
             CreateMap<EnderecoViewModel, Endereco>();
                 

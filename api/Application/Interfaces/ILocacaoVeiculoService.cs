@@ -10,5 +10,6 @@ namespace api.Application.Interfaces
         Task<SimulacaoViewModel> Simular(SimulacaoViewModel simulacaoVM);
         Task<IEnumerable<ReservaViewModel>> GetReservas();
         Task<IEnumerable<ReservaViewModel>> GetReservasByCliente(string token);
+        Task<ReservaViewModel> GetByReservaId(int id);
     }
 }

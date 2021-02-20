@@ -6,6 +6,7 @@ namespace api.Domain.ViewModels
 {
     public class ReservaViewModel
     {
+        public int Id { get; set; }
         public int TotalHoras { get; set; }
 
         public int ClienteId { get; set; }
